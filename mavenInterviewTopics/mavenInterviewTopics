@@ -1,0 +1,224 @@
+MAVEN:
+Dependency management tag is basically to define many common dependencies with central version
+& if want to override define same in child pom in dependencies tag
+
+
+
+
+
+Maven As build tool
+
+lifecycle in Maven:
+
+
+Clean
+Build
+site
+
+
+and every lifecycle has different phases & every phase has goals to do actions
+
+Clean lifecycle :
+mvn pre-clean  phase
+mvn clean          phase
+mvn post-clean    phase
+
+Deafult/Build lifecycle
+phases
+
+1
+validate ( validate project related setting )
+2
+initialize
+Initializes build state, for example set properties.
+
+3
+generate-sources
+Generate any source code to be included in compilation phases
+4
+process-sources
+Process the source code, for example, filter any value.
+5
+generate-resources
+Generate resources to be included in the package.
+6
+process-resources
+Copy and process the resources into the destination directory, ready for packaging phase.
+
+7
+compile
+Compile the source code of the project.
+8
+process-classes
+Post-process the generated files from compilation, for example to do bytecode enhancement/optimization on Java classes.
+9
+generate-test-sources
+10
+Generate any test source code to be included in compilation phase.
+
+11
+process-test-sources
+
+Process the test source code, for example, filter any values.
+12
+test-compile
+
+Compile the test source code into the test destination directory.
+
+12
+process-test-classes
+
+Process the generated files from test code file compilation.
+
+13
+test
+
+Run tests using a suitable unit testing framework (Junit is one).
+
+14
+prepare-package
+
+Perform any operations necessary to prepare a package before the actual packaging.
+
+15
+package
+
+Take the compiled code and package it in its distributable format, such as a JAR, WAR, or EAR file.
+
+16
+pre-integration-test
+
+Perform actions required before integration tests are executed. For example, setting up the required environment.
+
+17
+integration-test
+
+Process and deploy the package if necessary into an environment where integration tests can be run.
+
+18
+post-integration-test
+
+Perform actions required after integration tests have been executed. For example, cleaning up the environment.
+
+19
+verify
+
+Run any check-ups to verify the package is valid and meets quality criteria.
+
+20
+install
+
+Install the package into the local repository, which can be used as a dependency in other projects locally.
+
+21
+deploy
+
+Copies the final package to the remote repository for sharing with other developers and projects.
+
+
+
+
+
+Site Lifecycle
+Maven Site plugin is generally used to create fresh documentation to create reports, deploy site, etc. It has the following phases −
+
+pre-site
+site
+post-site
+site-deploy
+
+
+
+Inshort:
+
+clean lifcycle | has clean phase | run thrugh mvn clean
+build lifcycle | has many phase like genrating sources/resource/optimization/compile | run through mvn vaildate compile package verify install deploy
+
+
+Exploring more:
+
+default build lifecycle:
+
+validate: check if all information necessary for the build is available
+compile: compile the source code
+test-compile: compile the test source code
+test: run unit tests
+package: package compiled source code into the distributable format (jar, war, …)
+integration-test: process and deploy the package if needed to run integration tests
+install: install the package to a local repository
+deploy: copy the package to the remote repository
+
+
+phases & goals:
+
+compiler:compile – the compile goal from the compiler plugin is bound to the compile phase
+compiler:testCompile is bound to the test-compile phase
+surefire:test is bound to test phase
+install:install is bound to install phase
+jar:jar and war:war is bound to package phase
+
+
+SUPER PPM
+https://maven.apache.org/ref/3-LATEST/maven-model-builder/super-pom.html
+
+If needed to run any specific task/goal it can be run via plugin:task else all the below taks will be executed when any phase is triggered…
+
+
+
+Q1 ) How can a profile be triggered? How does this vary according to the type of profile being used?
+A profile can be activated in several ways:
+
+From the command line
+Through Maven settings
+Based on environment variables
+OS settings
+Present or missing files
+
+
+files can be explicitly specified using the -P command line flag.
+mvn groupId:artifactId:goal -P profile-1,profile-2,?profile-3
+
+
+Profiles can be activated in the Maven settings,
+<settings>
+  ...
+  <activeProfiles>
+    <activeProfile>profile-1</activeProfile>
+  </activeProfiles>
+  ...
+</settings>
+These triggers are specified via an <activation> section in the profile itself.
+
+
+Profiles specified in the POM can modify the following POM elements:
+
+<repositories>
+<pluginRepositories>
+<dependencies>
+<plugins>
+<properties> (not actually available in the main POM, but used behind the scenes)
+<modules>
+<reports>
+<reporting>
+<dependencyManagement>
+<distributionManagement>
+a subset of the <build> element, which consists of:
+<defaultGoal>
+<resources>
+<testResources>
+<directory>
+<finalName>
+<filters>
+<pluginManagement>
+<plugins>
+
+
+Profile Order
+All profile elements in a POM from active profiles overwrite the global elements with the same name of the POM or extend those in case of collections. In case multiple profiles are active in the same POM or external file, the ones which are defined later take precedence over the ones defined earlier (independent of their profile id and activation order).
+
+
+Maven is - at its heart - a plugin execution framework; all work is done by plugins. Looking for a specific goal to execute? This page lists the core plugins and others. There are the build and the reporting plugins:
+
+Build plugins will be executed during the build and they should be configured in the <build/> element from the POM.
+Reporting plugins will be executed during the site generation and they should be configured in the <reporting/> element from the POM. Because the result of a Reporting plugin is part of the generated site, Reporting plugins should be both internationalized and localized. You can read more about the localization of our plugins and how you can help.
+

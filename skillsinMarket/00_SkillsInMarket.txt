@@ -1,0 +1,18 @@
+Skills to Acquire
+
+1) Database performance, such as SQL tuning and optimization and administration (e.g. Oracle).
+2) Mid tier performance (e.g. Java profiling) and related tools.
+3) Load generation / measurement software and concepts (e.g. JMeter, or other custom load generation software) for HTTP, REST, RPC and similar cloud systems.
+4)operating system design / tuning / tools (e.g. Linux, OProfile).
+
+
+7+ years of experience with at least two programming languages such as Java, Scala, Python, Ruby, JavaScript or Go.
+5+ years of experience working with modern agile product development teams  of engineers, product managers and designers.
+5+ years of Experience with SQL/NoSQL technology such as PostgreSQL, MySQL, DynamoDB understanding common use cases and performance pitfalls
+2+ years of Experience dealing with event-driven architectures and message brokers such as RabbitMQ, KAFKA, ActiveMQ, etc and an in depth understanding of their use cases and pitfalls
+Versed in concepts such as DDD, SOLID, Cloud Native Patterns, distributed systems and architecture. Capable of understanding pitfalls and anticipating common failure modes of a microservice environment.
+Experienced in implementing prototypes and in practices and concepts such as MVP, A/B testing and feature toggles for rolling-out features to production.
+Strong communication skills: able to communicate effectively with technical and non technical partners
+Bachelor’s degree in computer science or equivalent professional experience.
+Passion for new technologies and proven capability in analysis and problem-solving.
+Strong troubleshooting and monitoring skills with practical experience in modern tools such as Kibana, Datadog, PagerDuty or related.
