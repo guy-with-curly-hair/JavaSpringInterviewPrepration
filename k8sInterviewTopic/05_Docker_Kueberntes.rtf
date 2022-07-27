@@ -1,62 +1,0 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2636
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww20820\viewh16620\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
-
-\f0\fs36 \cf0 mvn dockerfile:build\
-docker run -p ports:ports --net custom_network imageid\
-docker stop $(docker ps -aq)\
-docker rm -(docker ps -aq)\
-docker images prune\
-docker rmi -f $(docker images -sq)\
-docker create network netowkr_name\
-docker-compose up\
-docker-compose down
-\f1\fs24 \
- \
-
-\f0\fs36 Docker Extended commands\
-\
-Commands:\
-  attach      Attach local standard input, output, and error streams to a running container\
-  build       Build an image from a Dockerfile\
-  commit      Create a new image from a container's changes\
-  cp          Copy files/folders between a container and the local filesystem\
-  create      Create a new container\
-  diff        Inspect changes to files or directories on a container's filesystem\
-  events      Get real time events from the server\
-  exec        Run a command in a running container\
-  export      Export a container's filesystem as a tar archive\
-  history     Show the history of an image\
-  images      List images\
-  import      Import the contents from a tarball to create a filesystem image\
-  info        Display system-wide information\
-  inspect     Return low-level information on Docker objects\
-  kill        Kill one or more running containers\
-  load        Load an image from a tar archive or STDIN\
-  login       Log in to a Docker registry\
-  logout      Log out from a Docker registry\
-  logs        Fetch the logs of a container\
-  pause       Pause all processes within one or more containers\
-  port        List port mappings or a specific mapping for the container\
-  ps          List containers\
-  pull        Pull an image or a repository from a registry\
-  push        Push an image or a repository to a registry\
-  rename      Rename a container\
-  restart     Restart one or more containers\
-  rm          Remove one or more containers\
-  rmi         Remove one or more images\
-  run         Run a command in a new container\
-  save        Save one or more images to a tar archive (streamed to STDOUT by default)\
-  search      Search the Docker Hub for images\
-  start       Start one or more stopped containers\
-  stats       Display a live stream of container(s) resource usage statistics\
-  stop        Stop one or more running containers\
-  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE\
-  top         Display the running processes of a container\
-  unpause     Unpause all processes within one or more containers\
-  update      Update configuration of one or more containers\
-  version     Show the Docker version information\
-  wait        Block until one or more containers stop, then print their exit codes}

@@ -1,0 +1,1377 @@
+Java 8
+
+Java Pattern & Mathcher
+¯
+Matcher class
+matches() /find() / group()[return the matched subsequnce] /groupcount()
+
+PatternClass
+Compile /matcher /matches / split / pattern
+
+Patter.compile(“abc”
+String s[] = p.matches(inputString);
+
+For grouping u need to define pattern in form of grouping regex & the do p.matcher.find() & then u can get group if present
+
+
+
+Weak hashMap is a implementation of the map where keys that store only weak references to its key. Storing only weak references allows a key value pair  to be Gargage collected when the key is not refreshed outside
+
+Identity Hashmat
+Works on references equality & not on object equality
+
+Enum map
+Special implementation of map for enumerations type
+ENumMap<Enum,Vakue> = new EnumNMap<Month.class>()
+
+Heavy weight thread
+Means amount of context associated with a thread & consequently amount if time it take to do context switch
+
+Usually kernel level Thedas are heavy weights it takes lotto of hardware registers kernel stacks etc switches.
+
+
+How does priority queue & tree map work internally
+
+
+If 2 interface has same method defined as default & when both interface is implemented in 1 clsss
+Then if no implementation provide then compile error but if implementation is override then it fine ( we can either of interface method as well I1.super.getgreeting )
+
+
+Finalise method
+
+This method is called by garbage collector just before doing cleaning. If incase any resources are used by object it is advisable to free those resources in finalise method
+
+Concurrent modification error
+
+When collection is changed during iteration…
+Only way to avoid..use iterator method remove ( & when its happening collection sue nt change externally either by directly removing or by removing through different iterator at the same time )
+
+
+Exception & Errors
+Exception & error bth are subclasses of the trouble class..
+
+Creating an exception object is nt expensive but the operation to fill native call to fillInstackTrace method which walks through the call stack & collect all required information to build a stack trace : classes methods, lines, number..
+Most of throwable constructors implicitly cal fillinStackTrace. & that why creating exception is slow come from.
+We can make exception lightweight wither by not using fillintrace while initialising throwable or overriding fillinStacktrace.
+
+Now what about throwing an exception
+In fact it depends on where a thrown exception is caught if it is caught in same method then how is as fast & simple as goto
+
+However if a catch block is somewhere deeper in the stack then jam need to unwind the stack frames And this can take significantly longer, it can take longer if sync block & method are involved
+
+Checked exception & Unchecked exception:
+
+U can decide
+But if a method is likely to fail & chances of failure are more than 50% it sue throw checked exception to ensure alternate processing incase it failed. Another thought is programming errors should be unchecked & derive from RunTimeException
+
+& when u handle it via checked exception it makes your code ugly.
+
+
+
+Eception can be handled but error that is nt caught by user program
+
+JDBC
+
+Prepared statements are precompiled & hence has better performance
+Callable statements is sued to execute stored procedures
+
+
+Loggers’
+
+For logging we can use log4J framework
+
+It has 3 component :
+Logger
+Appender
+Layout
+
+Logger is the class in log4j package, we have to initialise the logger object for each java class & we use logger method to generate log statements
+
+It has static method for creating logger object & it has below method:
+
+Info/debug/warn/fatal/error
+
+Appender is used to write messages into a file or DB or SMPT
+
+Jdbc appenders
+Fileappender
+Smtpappenders
+
+
+Layout
+Used to define the formatting in which logs will print in a repo.
+
+Logging confirmation are defined in log4j.preoperteis
+
+Log4j.rootLogger=INFO , file ,stdout
+//appender info file based
+Log4j.appender.file.*(FILE/MAXFILESIZE/MaxBackupIndex,layput,layputConversionPatter
+
+//apender to console
+Log4j.appender.stdout=(Target/layput)
+
+
+Kind of relationship
+
+Is -a ( inheritance )
+Has -a ( composition )
+Uses -a ( aggregation )
+
+Example : House is a building
+           House has a room
+             House has an occupant
+
+
+Agregation & composition
+Aggregation implies child can exist without parent as well like employe can exist without bank
+
+But in case of composition child cannot exist without parent like heart without body
+
+
+
+Count occurence of character in String eg i:
+
+1) use Instream.rangeClose().forEach….
+2) s.chars().filter().count();  //charStream in form if IntStream with Asci value
+
+Count occurrence of every chapter in String
+3) Arrays.stream(s.split(“”)).map(String::toLowerCase).collect(groupingBy(s->s,HashMap::new,Collectors.counting)
+If there is any particular number then we can use filter & use count() directly
+
+
+Better example of grouping by :
+
+Person ( last name & city )
+Groupie on basis of city & accumulate all last names together
+By default HashMap is used for collection but if u need any other implementation like LinkedinhashMap or TreeMap then u can define in between first arg ( classifier ) & last arg ( collector downstream)
+
+//collect all person(full object) by city
+Persons.stream().collect(groupingby(Person::getCity,toList())
+Return Map<City,List<Person>
+If unique entry & use toSet() & equals HashCode need to be implemented
+
+
+//collect All person but only last name by city
+
+Persons.stream().collect( groupingby(Person::getCity, mapping(Person::getLastName,toList());
+Return Map<City,List<String>
+ **mapping( mapper , downStream) —> map & then put into downstream collector
+
+//If want to store result in sorted order then use TreeMap
+
+
+Persons.stream().groupingBy(Person::getCity,TreeMap::new,mapping(Person::getLastname,toList());
+
+//if you want to store only lastCity name with longest last name
+
+Comparator<String. byLength = Comparator.comparing(String::length);
+Map<City,String> longestLastnameByCity = people.stream().collect(groupingBy(Person::city,reducing(“”,Person::getLastName,BinaryOperator.maxby(byLength));
+
+
+getMaximum height person from all city
+
+heightComparator = comperator.comparing(Person::getHeight)
+Map<City,Optional<Person>. Map = persons.stream().collect(groupingBy(Person::city, reducing(BinaryOperator.maxBy(heightComperator));
+
+
+
+
+
+
+
+
+Java Time: java time:
+
+Older java.util.Date & java.util.calendar ( thread safety issue & not much api to support & zone support is less ) mostly please used coda lib
+
+Java 8 :
+LocalDate LocalTime LoclDateTime
+LocalDate ) Iso format ( yyyy-MM-DD )
+LocalDate.now/of/parse
+
+LocalTime ( represent time without date )
+LocalDateTime represent date + time.
+ZonedDateTime
+
+Period : quantity of time in in terms years months & days
+
+Duration class represent a quantity of time terms of seconds & nanseconds
+
+Instant
+Epic
+
+
+
+Java data types:
+
+Byte 1 byte
+Int  4 byte
+Long 8 byte
+Float 4 byte
+Double 8 byte
+Char 2 byte
+
+Sql
+varchar(n) n byte + 2. ( 8168 CHAR ) ( 4000 bytes )
+NUMBER 21 Byte
+LONG 2^31 -1 bytes
+ROWID 10 bytes
+Date 7 bytes
+CLOB 4 gigabyte
+Blob 4 gigabyte
+TImeStamp 11 byte
+
+CHAR 2000 byte
+
+Sql :
+
+CLOB character Large data
+BLOB binary large object .
+
+
+
+Java Reusability
+Using generics:
+
+
+
+
+Java serialisation
+When marker interface is implemented in parent class , child class will automatically inherit it & JVM will take care serialisation
+If any object is composed under class then either it has to be implement serialisation or it sue be marked as transient or it sad be null
+
+If parent class is not marked with serialisation but class is marked with and if you want to save/serialized super variable then it suddenly be done via readObject & iptilize them back in writeObject method. & if not handled it will be intilized with default value & default constructor must be present & if not present it will error.
+
+
+
+There is another interface called externizable which is used for custom serialisation and only custom fields will be serialised  & when deserialised it sud be in same order .. this same behaviour can be achieve via transient keyword but serialisation will heavy since even though it transit variable will be written with default value in file/network
+
+===================================================================================
+
+Java streams
+
+Streams is very helpful in funtional programming & you won’t impact source collection.
+Stream also can use multi core to parallel computing ..
+We can have multi intermediate operation which has stateful & stateless operation
+Stateful ( like sorted which need all output from previous step )
+Stateless ( like map , filter which work like all intermediate operation will happen on each element till terminal operation is called )
+Stream has concat & merge to merge multiple streams
+
+
+Functional interface
+Has only single unimplemented method. But can have default & static methods
+
+Java HashMap
+
+
+Get operation
+
+table[hash] —> Entry ( key , value , hash , Entry next )
+
+Key.hash == table[hash].hash && (table[hash].key == key || table[hash].key.equsls(key) )
+
+
+Put operation
+
+Key.hash == table[hash].hash && (table[hash].key == key || table[hash].key.equsls(key) )
+table[hash].value will be replaced
+
+Else new entry will be inserted
+
+
+
+
+
+Java Design patterns
+=============================================
+https://refactoring.guru/design-patterns/structural-patterns
+
+
+============================================================================
+JAVA Generics:
+
+
+The Need for Generics : Type Safety : Generics make errors to appear compile time than at run time
+Let's imagine a scenario where we want to create a list in Java to store Integer; we can be tempted to write:
+
+List list = new LinkedList();
+list.add(new Integer(1));
+Integer i = list.iterator().next();
+Surprisingly, the compiler will complain about the last line. It doesn't know what data type is returned. The compiler will require an explicit casting:
+
+Integer i = (Integer) list.iterator.next();
+There is no contract that could guarantee that the return type of the list is an Integer. The defined list could hold any object. We only know that we are retrieving a list by inspecting the context. When looking at types, it can only guarantee that it is an Object, thus requires an explicit cast to ensure that the type is safe.
+
+This cast can be annoying, we know that the data type in this list is an Integer. The cast is also cluttering our code. It can cause type-related runtime errors if a programmer makes a mistake with the explicit casting.
+
+It would be much easier if programmers could express their intention of using specific types and the compiler can ensure the correctness of such type. This is the core idea behind generics.
+
+Let's modify the first line of the previous code snippet to:
+
+List<Integer> list = new LinkedList<>();
+By adding the diamond operator <> containing the type, we narrow the specialization of this list only to Integer type i.e. we specify the type that will be held inside the list. The compiler can enforce the type at compile time.
+
+Implementing generic algorithms: By using generics, we can implement algorithms that work on different types of objects and at the same they are type safe too.
+
+Generic methods have a type parameter
+Type parameters can be bounded
+Code Reuse: We can write a method/class/interface once and use for any type we want.
+
+3.1. Bounded Generics
+As mentioned before, type parameters can be bounded. Bounded means “restricted“, we can restrict types that can be accepted by a method.
+
+For example, we can specify that a method accepts a type and all its subclasses (upper bound) or a type all its superclasses (lower bound).
+
+3.2. Multiple Bounds
+A type can also have multiple upper bounds as follows:
+
+1
+<T extends Number & Comparable>
+
+
+=======================================================================================================================================
+
+
+
+Concurrency:
+
+1) BlockingQueue & Its implmentation
+Ans ) this api is thread safe & handle producer consumer problem as well
+
+
+=======================================================================================================================================
+
+
+
+GarBage Collection:
+
+https://www.cubrid.org/blog/3826456
+
+GC Tuning
+Garbage colection tuning
+Examples of Tuning
+See the result of
+jstat –gcutil.
+S0 S1 E O P YGC YGCT FGC FGCT GCT
+12.16 0.00 5.18 63.78 20.32 54 2.047 5 6.946 8.993
+
+GC Type	GC Execution Times	GC Execution Time	Average
+Minor GC	54	2.047	37 s
+Full GC	5	6.946	1,389 ms
+
+First, you should check how the memory is used before starting GC tuning. Use the jstat –gccapacity option to check the memory usage. The result checked from this server is as follows.
+
+detailed way than jstat, the -verbosegc
+
+newRatio will make oldgen bigger comapre to youngen & so can have less majorGC
+
+
+Options to Be Checked for GC Tuning.
+
+Classification	Option	Description
+Heap area size	-Xms	Heap area size when starting JVM
+ 	-Xmx	Maximum heap area size
+New area size	-XX:NewRatio	Ratio of New area and Old area
+ 	-XX:NewSize	New area size
+ 	-XX:SurvivorRatio	Ratio of Eden area and Survivor area
+
+Setting Memory Size
+The following shows the relationship between the memory size, the number of GC execution, and the GC execution time.
+
+
+Large memory size
+decreases the number of GC executions.
+increases the GC execution time.
+Small memory size
+decreases the GC execution time.
+increases the number of GC executions.
+
+
+Types of Garbage Collectors:
+
+Serial Garbage Collector
+Parallel Garbage Collector
+CMS Garbage Collector
+G1 Garbage Collector
+
+Serial Garbage Collector:
+A single thread is used for garbage collection and it will freeze all the application threads while performing GC (Garbage Collection).
+
+Parallel Garbage Collection:
+It uses multiple threads for garbage collection, this also freezes all the application threads while performing GC
+
+CMS Garbage Collector:
+Concurrent Marksweep Garbage collector, CMS scans the heap mark and mark the instances that requires to be removed and then will clear the marked instances
+
+G1 Garbage Collector:
+This will divide the heap memory into equal parts and will perform the GC on the part which has lesser live data.
+
+What is the difference between CMS and G1GC?
+
+Both are designed to minimize long pause when performing GC. But G1GC is used for larger heap that is more than 4GB.
+
+CMS – Uses one or more thread to scan the memory periodically and remove the unused objects, where pause time is minimal but cpu time is more
+
+G1GC – It divides the memory into equal parts and cleans old generation by copy from one part to another
+
+
+GarbageCollectors work on live object which are accessibly from GC roots:
+
+1) Classes loaded by system class loader
+2)Live threads & referenced variables
+3) Local variables & params of JNI method
+4)Global JNI reference
+5)Object used as monitor for sync
+6) Object help from garbage collection by JVM for its purpose
+
+Very nice link must visit
+https://www.freecodecamp.org/news/garbage-collection-in-java-what-is-gc-and-how-it-works-in-the-jvm/
+
+
+
+=======================================================================================================================================
+
+
+Java Memory Model
+
+--Memory Allocation In Java ( how object allocation happens in java )
+http://tutorials.jenkov.com/java-concurrency/java-memory-model.html
+
+Java Memory Model - Visibility problem, fixing with volatile variable
+https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/java-memory-model.html?1
+https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/visibility-volatile.html
+
+Info:
+
+Heap & Meta space
+
+heap is divided into young gen & Old gen
+and young gen is divided into eden & 2 surviors sapce
+
+
+heap store actual objects, all thread can access all objects in the heap if they have refernce to it.
+
+Stack local varriables & functional call is stored..store refernce to object which is created in heap.only owner thread can acces the variable.
+
+Young generation is the space where every new object is created.
+
+Important Points:
+Most of the newly created objects are located in the Eden memory space.
+
+When Eden space is filled with objects, Minor GC is performed and all the survivor objects are moved to one of the survivor spaces.
+
+Minor GC also checks the survivor objects and move them to the other survivor space. So at a time, one of the survivor space is always empty.
+
+Objects that are survived after many cycles of GC, are moved to the Old generation memory space. Usually, By setting an age for the young generation objects before they become eligible to promote to Old generation.
+
+Perm Gen/Metaspace:
+
+PermGen space:
+Stores class related data, and is used to keep information for loaded classes and few other advanced features like StringPool.
+
+MetaSpace: (From 1.8, instead of perm gen)
+
+Are part of native memory – OS level
+Metaspace by default increases its size , To the limit of OS, while PermGen always has a fixed maximum size.
+No more out of memory error
+We can set the size of metaspace and also it increases automatically, but permgen wont increase by itself
+Garbage collection of the dead classes and classloaders is triggered once the class metadata usage reaches the MaxMetaspaceSize.
+So where does static variables and static classes are stored? Is it heap or Permgen?
+
+Since the heap has actual objects, static variables and static classes are stored in Permgen / Metaspace.
+
+T
+
+
+=======================================================================================================================================
+
+
+Java Collection API
+
+
+
+=======================================================================================================================================
+
+
+
+Java Interview Questions:
+
+Java8 features
+
+1_ StreamAPIs
+2) Date & time Apis
+3) Optional
+4) lambdas
+5) methodRefernce
+6) default method
+7 functional interfaces /SAM single abstract method
+
+Q1) why java is platform independent.?
+Ans : since Java sources classes get converted to byte code by java compiler & this byte can be run on platform
+Since JVM ​executes the Java bytecode which is platform-independent, Java is platform-independent.
+Working of Java Program:
+
+Java Program --Java compiler ---> java ByteCode(.class file ) ---JVM--->machineCode---CPU--> output
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+Q2 ) JVM/ JDK /JRE
+Ans
+JVM
+JVM (Java Virtual Machine) is an abstract machine. It is called a virtual machine because it doesn't physically exist. It is a specification that provides a runtime environment in which Java bytecode can be executed. It can also run those programs which are written in other languages and compiled to Java bytecode.
+JVM, JRE, and JDK are platform dependent because the configuration of each OS is different from each other. However, Java is platform independent.
+
+JRE (Java Runtime Environment) is a software package that provides Java class libraries, Java Virtual Machine (JVM), and other components that are required to run Java applications.
+
+JDK (Java Development Kit) is a software development kit required to develop applications in Java. When you download JDK, JRE is also downloaded with it.
+
+In addition to JRE, JDK also contains a number of development tools (compilers, JavaDoc, Java Debugger, etc).
+
+JDK = JRE + compilers + debugggers + JavaDoc
+JRE = JVM + Class libraries + rt jars
+JVM  == it converts bytercode to machine code and run it
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q3 ) what are the components of JVM/JVM architecture ??
+
+Ans: JVM consist of 5- main component
+
+A) Class Loading & linking initialisation
+2) Memory allocation & management
+3) Execution engine ( compiler & Jit )
+4) Katie method calls & initialisation
+5) java collection Api
+Provides runtime environment for your app
+
+
+basic:
+https://www.programiz.com/java-programming/jvm-jre-jdk
+
+Detailed:
+https://dzone.com/articles/jvm-architecture-explained
+https://dzone.com/articles/a-detailed-breakdown-of-the-jvm
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q4) How does the JVM work ??/
+
+Q4) java Memory model
+Ans) covered above
+https://dzone.com/articles/java-memory-management
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q5) Jvm provide & Class ladders type
+Ans) Bootstrapped classloader
+SystemClass/extension Classloader
+Applciation class lander
+
+BootStrap ClassLoader – Responsible for loading classes from the bootstrap classpath, nothing but rt.jar. Highest priority will be given to this loader.
+Extension ClassLoader – Responsible for loading classes which are inside the ext folder (jre\lib).
+Application ClassLoader –Responsible for loading Application Level Classpath, path mentioned Environment Variable, etc.
+The above ClassLoaders will follow Delegation Hierarchy Algorithm while loading the class files.
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+Q5.1) What is internals for JVM loading linking & initialisation
+Ans )
+ClassLoader Subsystem
+Runtime Data Area
+Execution Engine
+1. ClassLoader Subsystem
+Java's dynamic class loading functionality is handled by the ClassLoader subsystem. It loads, links. and initializes the class file when it refers to a class for the first time at runtime, not compile time.
+
+1.1 Loading
+Classes will be loaded by this component. BootStrap ClassLoader, Extension ClassLoader, and Application ClassLoader are the three ClassLoaders that will help in achieving it.
+
+
+1.2 Linking
+Verify – Bytecode verifier will verify whether the generated bytecode is proper or not if verification fails we will get the verification error.
+Prepare – For all static variables memory will be allocated and assigned with default values.
+Resolve – All symbolic memory references are replaced with the original references from Method Area.
+1.3 Initialization
+This is the final phase of ClassLoading; here, all static variables will be assigned with the original values, and the static block will be executed.
+
+JVM internal
+
+Https://blog.jamesdbloom.com/JVMInternals.html
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q6) Custom ClassLoader
+Ans) we can create custom class loader by extending classlaoder interface/abstract provide implemtnatin for method
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+Q7 ) Java principle/OOPS content
+-JAVA PRINCIPLES
+--Abstraction
+--Polymorphism
+---static/compile type binding, overloading
+---dynamic/runtime binding, overriding
+--Enacpsulation
+--Inheritace ( Is a )
+--Composition ( has a )
+
+Defined in detail in below info section
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q8 ) java collection Api & thread safe collection
+Ans ) ArrayList/LinkedList/Stack/hashMap/TreeMap/TreeSet/Set/SyncronozedMap/CopyOnwriteArray/Trie
+Iterators( failsafe/failfast)/
+Comparator/comperable
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q9 ) generics(wild card in genrics (upperbound/read)/(lowerbound/insert)/(type/only sout)
+) defined above in info section
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q10 ) happens before relations ship
+ANs) https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/happens-before.html
+
+It simple means once the value is written to variable all the corresponding read on that variable will read latest value & not from the
+Cache
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q11) Cloning interface/ deep cloning / shallow cloning
+Ans deep cloning clone all nested classes & their members whereas shall will clone one till 1 level parent
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q12 ) Serialisation & Externalisation  marker interface ) & SerialUUID
+Ans)
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+Q12 ) synchronised, volatile & Atomic
+
+Synchronizing the shared data access across threads achieves two things:
+Mutual exclusion of two thread execution over synchronized block. This achieves atomicity. A threads is not able to see incomplete writes (involving multiple variables) of other threads.
+Flushing of local thread memory to main memory at the time when the lock is released (at the end of synchronized block).
+
+Fixing visibility problem with volatile variable
+Java - Volatile reference object and its member fields visibility
+
+https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/java-memory-model.html?1
+https://www.logicbig.com/tutorials/core-java-tutorial/java-multi-threading/visibility-volatile.html
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q13) Difference in interface & abstract classes
+Abstract class has state whereas interface does not have
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q14) create deadlock
+
+Create 2 runnable which contains 2 object lock but
+
+Create bifunction which take 2 locks & return a ruubaleh task
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q15 ) create race condition
+
+Create a runnable task & share a variable shared between 2 threads
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q16) producer-consumer problem ( wait notify )
+
+Print even and odd
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q17) what is class/object level locking
+
+Object level locking…
+
+sync( object/this)
+
+T1 —> o1-> m1()//sync(this)
+T2 -> o2-> m1()//sync(this)
+T3 -> o2 -> m1()//sync(this) blocked
+T4 -> o2 -> m2()//sync(this) blocked
+T5 -> o2 -> m3() // no sync paralle
+
+Class level lock
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q18 ) Executer Service & its internal implementation
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q19) Fork Join working / Recursive task
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q20 ) Runnable & callable & computable difference & examples & Futures
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q21 ) Thread Join , cyclic barrier & countDown Latch
+
+Barrier is usable ( eg biker and need to meet at barrier before starting for new barrier )
+LatchDown ( its like water has arrived but min quantity food is not arrived)
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q22) Code to write addition of n number using multiple threads
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q23 ) Create Immutable classes
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q24 ) Synchronised , volatile & Atomic numbers difference
+
+Volatile only supports memory visibility or memory barrier
+Atomic support atomicity of operations & also guarantee memory visibility for that particular variable
+Where synchronised u able to achieve atomicity for complex tasks by making it mutually exclusive also
+Well I have read multiple places all writes under thread write under sync block will flushed to memory & follow happens before relationship
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+Q25) double locking check
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+Q26 ) Different the of exception & try with resource which java cerise & example
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+Q27 ) what is static & dynamic binding
+Ans )
+
+Static Binding (also known as Early Binding compile timw).
+determine at compile time
+method overloading
+The binding of overloaded methods is static
+binding of private, static and final methods always happen at compile time since these methods cannot be overridden.
+When the method overriding is actually happening and the reference of parent type is assigned to the object of child class type then such binding is resolved during runtime
+
+
+Dynamic Binding (also known as Late Binding).
+binding of overridden methods is dynamic.
+  dynamic binding happens at runtime.
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q28 ) Java Locks
+Ans )
+http://tutorials.jenkov.com/java-concurrency/synchronized.html
+http://tutorials.jenkov.com/java-concurrency/read-write-locks.html
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q29 ) access modifiers
+
+	Class	Package	Subclass (same pkg) Subclass(diff pkg) World
+public			+		+		+		+					+
+protected		+		+		+		+
+no modifier		+		+		+
+private			+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q30 ) How you can create try with resource type resource ??
+Ans ) u can create resource/Ytility extending AutoClosable
+In java 7, we have a new super interface java.lang.AutoCloseable. This interface have one method:
+
+void close() throws Exception;
+When we open any such AutoCloseable resource in special try-with-resource block, immediately after finishing the try block, JVM calls this close() method on all resources initialized in “try()” block.
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q31) Exception ( checked vs Unchecked ) & do order matter while defining exception in catch block ?
+Ans )
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q32 ) can we error in static block ?
+
+No it will fail saying Jim cannot start normally
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q32 ) how errors can be throw ? Trow or throws keyword ?
+
+Throw is sued to manually throw error from catch bock & throws is defined at method level & caller need to handle the error explicitly
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q33 ) different between treeset & treemap
+https://www.geeksforgeeks.org/difference-between-treemap-and-treeset-in-java/
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+Q34 Iterators
+https://www.baeldung.com/java-iterator
+https://www.baeldung.com/java-fail-safe-vs-fail-fast-iterator
+
+ListIterator
+3.1. hasPrevious() and previous()
+ListIterator can be used for backward traversal so it provides equivalents of hasNext() and next():
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+
+=======================================================================================================================================
+
+Java Locks Implementation:
+
+
+public class ReadWriteLock{
+
+  private int readers       = 0;
+  private int writers       = 0;
+  private int writeRequests = 0;
+
+  public synchronised void lockRead() throws InterruptedException{
+    while(writers > 0 || writeRequests > 0){
+      wait();
+    }
+    readers++;
+  }
+
+  public synchronised void unlockRead(){
+    readers--;
+    notifyAll();
+  }
+
+  public synchronised void lockWrite() throws InterruptedException{
+    writeRequests++;
+
+    while(readers > 0 || writers > 0){
+      wait();
+    }
+    writeRequests--;
+    writers++;
+  }
+
+  public synchronised void unlockWrite() throws InterruptedException{
+    writers--;
+    notifyAll();
+  }
+}
+
+-------------------
+
+public class ReadWriteLock{
+
+  private Map<Thread, Integer> readingThreads =
+      new HashMap<Thread, Integer>();
+
+  private int writers        = 0;
+  private int writeRequests  = 0;
+
+  public synchronized void lockRead() throws InterruptedException{
+    Thread callingThread = Thread.currentThread();
+    while(! canGrantReadAccess(callingThread)){
+      wait();
+    }
+
+    readingThreads.put(callingThread,
+       (getAccessCount(callingThread) + 1));
+  }
+
+
+  public synchronized void unlockRead(){
+    Thread callingThread = Thread.currentThread();
+    int accessCount = getAccessCount(callingThread);
+    if(accessCount == 1){ readingThreads.remove(callingThread); }
+    else { readingThreads.put(callingThread, (accessCount -1)); }
+    notifyAll();
+  }
+
+
+  private boolean canGrantReadAccess(Thread callingThread){
+    if(writers > 0)            return false;
+    if(isReader(callingThread) return true;
+    if(writeRequests > 0)      return false;
+    return true;
+  }
+
+  private int getReadAccessCount(Thread callingThread){
+    Integer accessCount = readingThreads.get(callingThread);
+    if(accessCount == null) return 0;
+    return accessCount.intValue();
+  }
+
+  private boolean isReader(Thread callingThread){
+    return readingThreads.get(callingThread) != null;
+  }
+
+}
+
+=======================================================================================================================================
+
+-JAVA PRINCIPLES
+
+
+--Abstraction
+--Polymorphism
+--Enacpsulation
+--Inheritace ( Is a )
+--Composition ( has a )
+
+Abstraction is one of the key concepts of object-oriented programming (OOP) languages.
+Its main goal is to handle complexity by hiding unnecessary details from the user
+
+Hiding the complex implementation
+eg:  car is viewed as a car rather than its individual components.
+
+Java Polymorphism
+Polymorphism means "many forms", and it occurs when we have many classes that are related to each other by inheritance.
+ Inheritance lets us inherit attributes and methods from another class. Polymorphism uses those methods to perform different tasks.
+
+
+
+Encapsulation
+
+Encapsulation is one of the four fundamental OOP concepts. The other three are inheritance, polymorphism, and abstraction.
+
+Encapsulation in Java is a mechanism of wrapping the data (variables) and code acting on the data (methods) together as a single unit.
+In encapsulation, the variables of a class will be hidden from other classes, and can be accessed only through the methods of their current class. Therefore, it is also known as data hiding.
+
+To achieve encapsulation in Java −
+
+Declare the variables of a class as private.
+
+Provide public setter and getter methods to modify and view the variables values.
+
+Benefits of Encapsulation
+The fields of a class can be made read-only or write-only.
+
+A class can have total control over what is stored in its fields.
+
+
+Encapsulation is data hiding(information hiding) while Abstraction is detailed hiding(implementation hiding).
+
+
+While encapsulation groups together data and methods that act upon the data, data abstraction deal with exposing the interface to the user and hiding the details of implementation.
+
+=======================================================================================================================================
+
+
+Java CompletableFuture
+
+Completable future
+run in different thread then main app and use Global Fork.Join Pool
+
+
+Option 1 :
+Run a task which wont return anything & this will run totally indepently...!!
+where in callable one since either we wud be using executer or we are using thead to run so main app must wait for it completion...
+eg:CompletableFuture.runAsync()  --> this will return void
+
+
+Option 2:
+completable future return future then use CompletableFuture.supplyAsync(() which will return the value afer it execution
+& if you do completablefututre.get //call will blocked...
+
+
+option 3:
+Ypu want to run multiple operation one after other then u can chain in completable future...
+CompletableFuture
+--thenApply ( when one CF is dpende on other & want to return something..
+--then Accept ( will accept input from another CF but wont return anythung
+--thenRun ( will run independetly once parent CF copleted & wont return anything )
+
+
+if you want to combine something over another CF Th use can
+
+incase of depdndent tasks
+--Composeof of CF this will chain the multiple CFs one after other & will pass then  result to pne another in order..
+
+--if your 2 tasks are idnependent & 3rd depends upon first 2 the we can use combineOf..
+
+      System.out.println("Calculating BMI.");
+        CompletableFuture<Double> combinedFuture = weightInKgFuture
+                .thenCombine(heightInCmFuture, (weightInKg, heightInCm) -> {
+                    Double heightInMeter = heightInCm/100;
+                    return weightInKg/(heightInMeter*heightInMeter);
+                });
+
+
+
+---CFs Allof & AnyOFF...
+if you have multiple jobs but u need output from any one then ucase use anyOf
+        CompletableFuture<Object> anyOfFuture = CompletableFuture.anyOf(future1, future2, future3);
+
+
+https://www.callicoder.com/java-8-completablefuture-tutorial/
+
+
+
+=======================================================================================================================================
+
+
+
+Java Files:
+
+		nputStream
+		OutputStream
+		Above classes deal with byte arrays
+
+		Subclasses for above 2 classes are :
+
+		--InputStream(Base Class)
+
+		--FileInputStream
+
+		The Java FileInputStream class, java.io.FileInputStream, makes it possible to read the contents of a file as a stream of bytes.
+		FileInputStream fileInputStream = new FileInputStream("c:\\data\\input-text.txt");
+		Example:--
+		byte[] data      = new byte[1024];
+		int    bytesRead = fileInputStream.read(data, 0, data.length);
+		while(bytesRead != -1)
+		  doSomethingWithData(data, bytesRead);
+		  bytesRead = fileInputStream.read(data, 0, data.length);
+
+		--BufferedInputStream
+		Buffer version of InputStream
+		eg:
+		int bufferSize = 8 * 1024;
+		BufferedInputStream bufferedInputStream = new BufferedInputStream(
+		                      new FileInputStream("c:\\data\\input-file.txt"),
+		                      bufferSize
+
+
+		ByteArray
+		the ByteArrayInputStream class can turn a byte array into an InputStream.
+		eg:
+		byte[] bytes = ... //get byte array from somewhere.
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+
+		--DataInputStream:
+		The Java DataInputStream class, java.io.DataInputStream, enables you to read Java primitives (int, float, long etc.) from an InputStream
+		instead of only raw bytes.
+
+
+		--ObjectInputStream ( enables you to read java object from InputStream)
+		Convert InputStream to Object
+		eg:
+		      InputStream is = new ByteArrayInputStream(bytes);
+		      try (ObjectInputStream ois = new ObjectInputStream(is)) {
+		          return ois.readObject();
+
+
+		--Additonal Inout/op streams
+		 Piped/Filter/Pushback/
+
+		 ====================================================
+
+		 OutputStream -->
+		 A Java OutputStream is typically connected to some data destination - as mentioned in the Java IO Overview,
+		 like a file, network connection, pipe, memory buffer etc.
+
+
+		 FileOutputStream
+		 makes it possible to write a file as a stream of bytes
+
+		 OutputStream output = new FileOutputStream("c:\\data\\output-text.txt");
+
+		 while(moreData) {
+		   int data = getMoreData();
+		   output.write(data);
+		 }
+		 output.close();
+
+		 ByteArrayOutputStream
+		 byte[] bytes = byteArrayOutputStream.toByteArray();
+
+
+
+		 BufferedOutputStream:
+		 int bufferSize = 8 * 1024;
+		 OutputStream output = new BufferedOutputStream(
+		                       new FileOutputStream("c:\\data\\output-file.txt"),
+		                           bufferSize
+		 );
+		 byte bytes =  new byte[]{1,2,3,4,5};
+		 outputStream.write(bytes);
+
+		 ObjectOutputStream
+
+		Enables you to write Java objects to an OutputStream instead of just raw bytes.
+		ObjectOutputStream objectOutputStream =
+		    new ObjectOutputStream(new FileOutputStream("object.data"));
+		MyClass object = new MyClass();
+		output.writeObject(object);
+		output.close();
+
+		All the above classes mostly dealing with bytes & bute array directly...
+
+		Java Reader
+		Java Writer
+
+		java Reader ( base class )
+		t is character based rather than byte based
+		eg:
+
+		InputStreameader:
+		wraps a Java InputStream, thereby turning the byte based InputStream into a character based Reader.
+
+		InputStream inputStream       = new FileInputStream("c:\\data\\input.txt");
+		Reader      inputStreamReader = new InputStreamReader(inputStream);
+
+		int data = inputStreamReader.read();
+		while(data != -1){
+		    char theChar = (char) data;
+		    data = inputStreamReader.read();
+		}
+
+		inputStreamReader.close();
+		example :
+		InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+		BufferedReader reader = new BufferedReader(isr)
+		{
+
+		      String str;
+		      while ((str = reader.readLine()) != null) {
+		          System.out.println(str);
+		      }
+
+
+
+		FileReader
+		File Reader is subclass: to read file in character
+		Reader reader = new FileReader("/path/to/file/thefile.txt");
+
+
+
+		char[] theChars = new char[128];
+
+		int charsRead = reader.read(theChars, 0, theChars.length);
+		while(charsRead != -1) {
+		    System.out.println(new String(theChars, 0, charsRead));
+		    charsRead = reader.read(theChars, 0, theChars.length);
+		}
+
+		BufferReader
+
+		Reader reader =
+		    new BufferedReader(
+		        new FileReader("/path/to/file/thefile.txt"));
+
+		int theCharNum = reader.read();
+		while(theCharNum != -1) {
+		    char theChar = (char) theCharNum;
+
+		    System.out.print(theChar);
+
+		    theCharNum = reader.read();
+		}
+
+
+		StringReader
+		The Java StringReader class enables you to turn an ordinary String into a Reader
+
+
+		JavaWriter:
+		A Writer is like an OutputStream except that it is character based rather than byte based.
+
+
+		OutputStream:
+		The Java OutputStreamWriter class, java.io.OutputStreamWriter, is intended to wrap an Java OutputStream
+		and thereby turning the byte based output stream into a character based Writer.
+
+		OutputStream       outputStream       = new FileOutputStream("c:\\data\\output.txt");
+		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+
+		outputStreamWriter.write("Hello World");
+
+		outputStreamWriter.close();
+
+
+		FileWriter::
+		The Java FileWriter class, java.io.FileWriter, makes it possible to write characters to a file.
+		In that respect the Java FileWriter works much like the FileOutputStream
+		except that a FileOutputStream is byte based, whereas a FileWriter is character based.
+
+		Overwriting vs. Appending the File
+		When you create a Java FileWriter you can decide if you want to overwrite any existing file with the same name,
+		or if you want to append to any existing file. You decide that by choosing what FileWriter constructor you use.
+
+		Writer fileWriter = new FileWriter("c:\\data\\output.txt", true);  //appends to file
+
+		Writer fileWriter = new FileWriter("c:\\data\\output.txt", false); //overwrites file
+
+		BufferWriter:
+		int bufferSize = 8 * 1024;
+
+		BufferedWriter bufferedWriter =
+		    new BufferedWriter(
+		        new FileWriter("c:\\data\\output-file.txt"),
+		            bufferSize);
+
+
+		Example:
+
+		byte[] to String (text data)
+
+		getByte (( example       byte[] bytes = str.getBytes(StandardCharsets.UTF_8); ))
+		 String s = new String(bytes, StandardCharsets.UTF_8);
+
+		 Example 2:
+
+		 Convert byte[] to String (binary data)
+
+		 The below example converts an image phone.png into a byte[],
+		 and uses the Java 8 Base64 class to convert the byte[] to a Base64 encoded String.
+		 Later, we convert the Base64 encoded string back to the original byte[]
+		 and save it into another image named phone2.png.
+
+		//read the file/ image in byte array
+		   byte[] bytes = Files.readAllBytes(path);
+		   //convert the byte into bindary data with encder
+		               String s = Base64.getEncoder().encodeToString(bytes);
+		               byte[] decode = Base64.getDecoder().decode(s);
+		                Files.write(Paths.get("/Users/mkyong/phone2.png"), decode);
+
+
+		https://mkyong.com/java/how-do-convert-byte-array-to-string-in-java/
+		https://mkyong.com/java/how-to-write-an-image-to-file-imageio/
+
+		====================================================================================
+		Files:
+		 BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+		  List<String> list = Files.readAllLines(path, StandardCharsets.UTF_8);
+		   Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8);
+
+
+
+		 try (FileOutputStream fos = new FileOutputStream(file);
+		       OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+		       BufferedWriter writer = new BufferedWriter(osw)) {
+
+		        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
+		 try (FileWriter fw = new FileWriter(new File(fileName), StandardCharsets.UTF_8);
+		             BufferedWriter writer = new BufferedWriter(fw)) {
+
+		            for (String line : lines) {
+		                writer.append(line);
+		                writer.newLine();
+		            } 
+
+
+		Java 8 New Date And Time APIs
+
+		java.time
+		  dates
+		   times
+		    Instants
+		   duration
+		 period
+		 time zones
+
+		—java.time.format
+		—java.time.temporal
+		—java.time.zone
+
+This is for user/humans
+		LocalDate
+		LocalTime
+		LocalDateTime
+
+		Instant is for machine normally
+		but all these apis has many static method to get temporal fields
+
+		above all can be adjusted / manipulated on fixed & relative basis
+		TemporalAdjusters allow you to manipulate date in much more complex ways
+		Formater are there to format with defined formatter based on local & global ISO you can also create custom datetimeformater using builder provided by formatter class
+		there is timeZone as well which can be used to specify timezone relative specific region/location & as a fixed offset from UTC
+		All APis re thread safe
+		  
+
+		Collectors API
+
+		joining( char delimiter , prefix, suffix ) // multiple override
+
+		.collect ( toList()
+		.collect(Collectors.toCollection(TreeSet::new)
+
+		.collect(Collectors.joining(“, “);
+
+		.collect(Collectors.summingint(Employe::getSalary);
+
+		groupingBy(Employe:department)
+		groupingby(Employe::getDepartment, Collectors.summingInt(Employe::getSalary));
+
+		//Partition students into passing and failing
+		Map<Boolean, List<Student> map = collect( partitioningBy(s-> s.getGrade > 2 ( predicate )) we can give collectors downstream as well to map data accordingly rather than taking whole object
+
+		collect(partitioningBy(s-> predicate , mapping())
+		Map<Boolean , Map<>> map = collect(partioningBy(s-> predicate , groupingBy()
+
+
+		reduce ( identity , mapper , operator )
+
+		mapper will be jus two modify the input if needed and then operator will be applied to all the input element passed .
+
+
+
+		How to read a file in Java
+
+
+		List<String> lines = Files.readAllLines(Path.getpath(file path), encoding);
+		Stream<String> s = Files.lines(path, encoding)
+
+
+		Way1 :
+
+
+		File f = new File(“path”);
+		BufferReader br = new BufferReader ( new FileReader (file));
+
+		str = br.readLine !=null && read all line 1 by 1
+
+		way 2 :
+		FilReader fr = new FileReader(“path”);
+
+		int i =fr.read != -1
+
+		sort (char) I;
+
+
+		way 3 :
+		File f ;
+
+		Scanner s = new Scanner(file);
+		s.hasNextLines
+
+
+		way4 :
+
+		List<String> s = Files,readAllLines(Paths.get(), StandardCharSets.UTF_8)
+
+
+		way5 :
+
+		String data = new String(Files,readAllBytes(Paths.get(file path)); 
+
+
+
+
+
+

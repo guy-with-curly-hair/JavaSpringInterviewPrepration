@@ -1,0 +1,111 @@
+Spring Microservices
+
+
+—how to make image process fast
+—how to write optimized dockefile
+—eureka eviction params
+—check health of container
+—secrets in spring cloud config  ( DONE )
+—connectivity between 2 microservices through rest templete  (DONE )
+--checked through service via docker compose ( how to create services through  dcker command) did not worked
+—how depends on & links works & fix it {DONE)
+—how to make sure process under container is started & healthy
+
+
+
+1) service dicovery means & internal details & propertis
+2) API Gateway
+3) cloud  config server & internals
+4) dynamic refresh @Refreshed scope
+5) Resilience patterns in micrro service ( microservice api patterns )
+circuit breaker
+rate limited
+retur
+bulkhead
+
+
+Spring Security:
+
+https://www.marcobehler.com/guides/spring-security
+
+
+As soon as you added spring security starter basic authentication will start appearing when client hit the
+http url with only user as user & system generated password when we started our server..
+And http auth dialog box will start coming for user/passwd
+
+
+
+So above step will add security to your apps
+All http request path will require authentication
+No specific roles/authoritites is required
+No login page
+Authentication is prompted with http basic authentication
+There is only 1 username , “user”
+
+And now when you do @EnableWebSecurity on newly created class which extends WebSecurityConfgureAdaptor & start hit the http url it will show security login page
+
+Now spring security offers you to setup user store for auth.
+1) In memory
+2) jdbc based
+LDAP-based
+Customer based
+
+When u extend WebSecurityConfigurerAdaptor it will ask you to override authenticate method whichh has argument AuthenticationManager Builder ( builder patter)
+And that will help in setting up user store
+
+Auth.inmemory().withUser().password().autheritites() & so on //In memory
+Auth.jdbcAuthnetication().dataSruce(ds) ( it expect tables like users , authorities, group,group_members,group_authorities
+
+& for password secrecy we have passwordEncoder()
+
+LDAP () Lightweight director access protocol  setup is also possible with local ldap server loaded from ldap files or can access remote ldap server when provided url using context() in authbuilder
+
+
+
+We have seen spring Databased authentication using jdbc…
+
+Not we can leverage spring Jpa
+
+We can create user class extending userDetails from spring security & a repository & service which will call reporters to load user name & related data
+And we can configure this userDertailde service in auth builder for user auth
+
+userDetail methods :
+Which has methods : getAuthorities() [return collection f  authritites provided tourer ] / isAccountNonExpired / isAccountNonLocked) / isCredentilsNonExpired . isEnabled
+
+
+To configure security rules we have another method from WebSecurityConfigurereAdaptor …confiure( HttpSecurity http)
+
+-certain condition to be met before allowing request to be served
+
+Intersepting request to ensure the user has proper authority is main thing u will configure it with http
+
+Eg:
+
+confgiure( http)
+{
+http.authorizeRequest().anyMatchers(“/design”,”/order”).hasRole(ROLE_USER)
+.antMatcher(“/“,”/**).permitAll() } precedents is import & first will be at propriety
+
+allow access to  users
+Other methods : access(Spel String true) , anonymous , authenticated () denyAll() fullyAuthenticated hasAnyAuthority
+hasAnyROle has Authority (String ) hasRole() , not, rememberme() , permitaALL()
+
+How you will get to know user…
+
+Inject a principal object directly from caller
+Inject authentication Object. ( authentication.getprinicpal )
+securityContext holder to get security context & get authenction object from it
+Use @AuthenticationPrinicpal. User user in method it will auto wired from security context )
+
+Spring Security is bunch of servlet filters & it work in chaining operations
+
+For example, an incoming HTTP request would…
+	1	First, go through a LoginMethodFilter…
+	2	Then, go through an AuthenticationFilter…
+	3	Then, go through an AuthorizationFilter…
+	4	Finally, hit your servlet.
+
+By overriding the adapter’s configure(HttpSecurity) method, you get a nice little DSL with which you can configure your FilterChain.
+
+
+

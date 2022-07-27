@@ -1,0 +1,110 @@
+—-Create Spring array;
+
+String word[] = {“Ram”, “VT”};
+String[] word = {“VT”};
+
+
+
+1) Sort the array ( int )
+
+Arrays.sort(a);
+
+2) sort the array in reverse order
+ Arrays.sort(a,Comperator.reverseOrder());
+
+3) Convert the array (int) to List<Integer>
+Arrays.sort(a).boxed().collect(Collectors.toList());
+
+4) Convert List <Integer> to array
+list.stream().mapToInt(I ->I).toArray();
+
+5) sum/avg/max/min is part of IntStream so if object class is there we need to convert in rspective primitive class
+
+int[] a = new int[];
+
+Arrays.stream(a).sum();
+lsit.stream.mapToInt( I -I).sum()/max()/min();
+
+
+
+2) Stream on array
+Arrays.stream(a);
+
+
+Binary search
+
+Arrays.binarySearch(a, key) & has many flavours for start to end
+Collections.binarySearch()
+
+
+
+3) LOOP
+Instream.range/rangeClosed(0,count).forEach( consumer<T>);
+
+4) flatmap
+List1<Integer>
+List2<Integer>
+
+List.stream().map (I -> list.stream().map(j -> new int[]{I,j})
+Creating 2D array from flat list
+
+Usecase2:
+List<List<inteegr>
+
+L.stream().map(I-> I.stream()).collect(Collectors.toLsit());
+
+
+
+
+
+
+
+
+
+Comparable	Comparator¯
+1) Comparable provides a single sorting sequence. In other words, we can sort the collection on the basis of a single element such as id, name, and price.
+The Comparator provides multiple sorting sequences. In other words, we can sort the collection on the basis of multiple elements such as id, name, and price etc.
+
+
+2) Comparable affects the original class, i.e., the actual class is modified.
+Comparator doesn't affect the original class, i.e., the actual class is not modified.
+
+3) Comparable provides compareTo() method to sort elements.
+Comparator provides compare() method to sort elements.
+
+4) Comparable is present in java.lang package.
+A Comparator is present in the java.util package.
+
+Stundet implement comparable<Student>
+
+public int toCompare(Student st )
+{
+
+this.age == st.age
+0
+this.age > st.age
+1
+
+this.age < st.age
+-1
+
+}
+
+collection.sort(list<Student>);
+
+
+MyAgeCOmperator implements comperator<Student>
+{
+
+public int compre(Student s1,Stndet s2)
+
+s1.age == s2.age
+0
+s1.age > s2.age
+1
+
+s1.age < s2.age
+-1
+
+}
+collection.sort( list<Student>,MyAgeCOmperator);
