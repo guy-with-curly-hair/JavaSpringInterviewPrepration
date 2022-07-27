@@ -15,7 +15,7 @@ By default, Spring beans are singletons. The problem arises when we try to wire 
 https://www.baeldung.com/spring-inject-prototype-bean-into-singleton
 
 
-How to pass List to REST API endpoint
+How to pass List<Integer> to REST API endpoint
 1) way pass via request param
 
 @GetMapping

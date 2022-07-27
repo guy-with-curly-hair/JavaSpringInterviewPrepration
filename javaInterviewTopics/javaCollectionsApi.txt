@@ -108,3 +108,16 @@ s1.age < s2.age
 
 }
 collection.sort( list<Student>,MyAgeCOmperator);
+
+
+Question: MorganStanley
+
+List<List<Employee>> --> Map<String,List<Employee>> using streams
+
+lsit.stream().flatMap(l -> l.stream()).collect(Collectors.partitionby(Employee::getDepartment
+
+2) String s = "k1-1,k2-1,k3-2"
+Map<String.INteger> using stream
+
+
+
