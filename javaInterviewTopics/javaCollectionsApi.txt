@@ -121,3 +121,27 @@ Map<String.INteger> using stream
 
 
 
+Collectors API
+
+		joining( char delimiter , prefix, suffix ) // multiple override
+
+		.collect ( toList()
+		.collect(Collectors.toCollection(TreeSet::new)
+
+		.collect(Collectors.joining(“, “);
+
+		.collect(Collectors.summingint(Employe::getSalary);
+
+		groupingBy(Employe:department)
+		groupingby(Employe::getDepartment, Collectors.summingInt(Employe::getSalary));
+
+		//Partition students into passing and failing
+		Map<Boolean, List<Student> map = collect( partitioningBy(s-> s.getGrade > 2 ( predicate )) we can give collectors downstream as well to map data accordingly rather than taking whole object
+
+		collect(partitioningBy(s-> predicate , mapping())
+		Map<Boolean , Map<>> map = collect(partioningBy(s-> predicate , groupingBy()
+
+
+		reduce ( identity , mapper , operator )
+
+		mapper will be jus two modify the input if needed and then operator will be applied to all the input element passed .
