@@ -1,0 +1,45 @@
+System CLients  AppClient/ BrwserBasedClient / MicroServiceBasedClients
+
+apis
+
+searchFlight
+getItenory
+checkPnr
+createBooking
+CheckIn
+cancel
+
+//independent microservice
+notifyCustomer
+
+read:write ratio  100:1
+
+Total users
+Active Users per day : = 10M
+
+Request per second - 10*100k/3600 *24 =
+
+BandWidth estimation per second: 10kb *  request Per second
+
+Avaibility = High since user do many bookings at last moment so system sud be highly available.
+
+Since read is more than write
+we can use cache between user & search operation.
+
+cache hot routes (preloaded)
+cache seasonal hot routes ( preloaded )
+cache routes which were querired 40% in today request & cache them to server faster
+
+Latency : Medium
+Throughput : Medium
+
+searchController
+
+searchFLights( user_id, source , desitnation , roundtrip , startdate, end date )
+
+we can go with sql database here in this case
+
+
+
+
+

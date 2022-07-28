@@ -1,0 +1,144 @@
+https://www.guru99.com/clustered-vs-non-clustered-index.html
+https://www.guru99.com/sql-vs-nosql.html
+https://www.guru99.com/dbms-concurrency-control.html
+https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd/
+
+• Clustered/unclustered
+– Clustered = records close in index are close in data
+– Unclustered = records close in index may be far in data
+
+
+Primary/secondary
+– Meaning 1:
+• Primary = is over attributes that include the primary key
+• Secondary = otherwise
+– Meaning 2: means the same as clustered/unclustered
+
+Clustered
+– Index determines the location of indexed records
+– Typically, clustered index is one where values are
+data records (but not necessary)
+• Unclustered
+– Index cannot reorder data, does not determine
+data location
+– In these indexes: value = pointer to data record
+
+
+order of columns in index matters ??
+
+
+multi column index
+if you are using index with ( state , city , zip )
+& ur querire is on state city or on city zip
+
+but if you queries are just on zip so this index wont be used
+
+
+Very Good link
+https://use-the-index-luke.com/sql/where-clause/the-equals-operator/concatenated-keys
+
+
+DBMS Concurrency Control: Timestamp & Lock-Based Protocols
+https://www.guru99.com/dbms-concurrency-control.html
+
+
+
+create trigger [trigger_name]
+[before | after]
+{insert | update | delete}
+on [table_name]
+[for each row]
+[trigger_body]
+
+Key	Triggers	Stored procedures
+1
+
+Basic
+
+trigger is a stored procedure that runs automatically when various events happen (eg update, insert, delete)
+
+Stored procedures are a pieces of the code in written in PL/SQL to do some specific task
+
+2
+
+        Running Methodology
+
+It can execute automatically based on the events
+
+It can be invoked explicitly by the user
+
+3
+
+Parameter
+
+It can not take input as parameter
+
+It can take input as a parameter
+
+4
+
+Transaction statements
+
+we can't use transaction statements inside a trigger
+
+We can use transaction statements like begin transaction, commit transaction, and rollback inside a stored procedure
+
+5
+
+Return
+
+Triggers can not return values
+
+Stored procedures can return values
+
+
+
+Sr. No.	Key	Function	Procedure
+1	Definition	A function is used to calculate result using given inputs.	A procedure is used to perform certain task in order.
+2	Call	A function can be called by a procedure.	A procedure cannot be called by a function.
+3	DML	DML statments cannot be executed within a function.	DML statements can be executed within a procedure.
+4	SQL, Query	A function can be called within a query.	A procedure cannot be called within a query.
+5	SQL, Call	Whenever a function is called, it is first compiled before being called.	A procedure is compiled once and can be called multiple times without being compiled.
+6	SQL, Return	A function returns a value and control to calling function or code.	A procedure returns the control but not any value to calling function or code.
+7	try-catch	A function has no support for try-catch	A procedure has support for try-catch blocks.
+8	SELECT	A select statement can have a function call.	A select statemnt can't have a procedure call.
+9	Explicit Transaction Handling	A function can not have explicit transaction handling.	A procedure can use explicit transaction handling.
+
+
+
+
+
+Sr. No.	Key	SQL	PL/SQL
+1	Definition	SQL, is Structural Query Language for database.	PL/SQL is a programming language using SQL for a database.
+2	Variables	SQL has no variables.	PL/SQL has variables, data types etc.
+3	Control Structures	SQL has no FOR loop, if control and similar structures.	PL/SQL has FOR loop, while loop, if controls and other similar structures.
+4	Operations	SQL can execute a single operation at a time.	PL/SQL can perform multiple operation at a time.
+5	Language Type	SQL is a declarative language.	PL/SQL is a procedural language.
+6	Embedded	SQL can be embedded in a PL/SQL block.	PL/SQL can also be embedded in SQL code.
+6	Interaction	SQL directly interacts with database server.	PL/SQL does not directly interacts with database server.
+7	Orientation	SQL is data oriented language.	PL/SQL is application oriented language.
+8	Objective	SQL is used to write queries, create and execute DDL and DML statments.	PL/SQL is used to write program blocks, functions, procedures, triggers and packages.
+
+
+Isolation in sql
+
+https://blog.bytebytego.com/p/what-are-database-isolation-levels
+
+
+dirty read
+repeatable read
+phantom read
+
+
+islocation:
+serilizable
+Non-repeatable read
+read commited
+read uncommited
+
+byte byte newletter
+
+https://blog.bytebytego.com/?utm_source=linkedin_post
+
+
+

@@ -1,0 +1,6 @@
+26. What's the basic adv of Kafka over other messaging queues
+27. Consumer groups in Kafka
+28. If 2 consumers are part of a consumer group, both the consumers will get the same message or only either of them will get the same message
+29. What happens if 2 consumers belong to different consumer groups
+30. Concept of sharding
+31. How do we shard the data? What's shard key?

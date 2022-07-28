@@ -1,0 +1,242 @@
+InputStream
+OutputStream
+Above classes deal with byte arrays
+
+Subclasses for above 2 classes are :
+
+--InputStream(Base Class)
+
+--FileInputStream
+
+The Java FileInputStream class, java.io.FileInputStream, makes it possible to read the contents of a file as a stream of bytes.
+FileInputStream fileInputStream = new FileInputStream("c:\\data\\input-text.txt");
+Example:--
+byte[] data      = new byte[1024];
+int    bytesRead = fileInputStream.read(data, 0, data.length);
+while(bytesRead != -1)
+  doSomethingWithData(data, bytesRead);
+  bytesRead = fileInputStream.read(data, 0, data.length);
+
+--BufferedInputStream
+Buffer version of InputStream
+eg:
+int bufferSize = 8 * 1024;
+BufferedInputStream bufferedInputStream = new BufferedInputStream(
+                      new FileInputStream("c:\\data\\input-file.txt"),
+                      bufferSize
+
+
+ByteArray
+the ByteArrayInputStream class can turn a byte array into an InputStream.
+eg:
+byte[] bytes = ... //get byte array from somewhere.
+ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+
+--DataInputStream:
+The Java DataInputStream class, java.io.DataInputStream, enables you to read Java primitives (int, float, long etc.) from an InputStream
+instead of only raw bytes.
+
+
+--ObjectInputStream ( enables you to read java object from InputStream)
+Convert InputStream to Object
+eg:
+      InputStream is = new ByteArrayInputStream(bytes);
+      try (ObjectInputStream ois = new ObjectInputStream(is)) {
+          return ois.readObject();
+
+
+--Additonal Inout/op streams
+ Piped/Filter/Pushback/
+
+ ====================================================
+
+ OutputStream -->
+ A Java OutputStream is typically connected to some data destination - as mentioned in the Java IO Overview,
+ like a file, network connection, pipe, memory buffer etc.
+
+
+ FileOutputStream
+ makes it possible to write a file as a stream of bytes
+
+ OutputStream output = new FileOutputStream("c:\\data\\output-text.txt");
+
+ while(moreData) {
+   int data = getMoreData();
+   output.write(data);
+ }
+ output.close();
+
+ ByteArrayOutputStream
+ byte[] bytes = byteArrayOutputStream.toByteArray();
+
+ BufferedOutputStream:
+ int bufferSize = 8 * 1024;
+ OutputStream output = new BufferedOutputStream(
+                       new FileOutputStream("c:\\data\\output-file.txt"),
+                           bufferSize
+ );
+ byte bytes =  new byte[]{1,2,3,4,5};
+ outputStream.write(bytes);
+
+ ObjectOutputStream
+
+Enables you to write Java objects to an OutputStream instead of just raw bytes.
+ObjectOutputStream objectOutputStream =
+    new ObjectOutputStream(new FileOutputStream("object.data"));
+MyClass object = new MyClass();
+output.writeObject(object);
+output.close();
+
+All the above classes mostly dealing with bytes & bute array directly...
+
+Java Reader
+Java Writer
+
+java Reader ( base class )
+t is character based rather than byte based
+eg:
+
+InputStreameader:
+wraps a Java InputStream, thereby turning the byte based InputStream into a character based Reader.
+
+InputStream inputStream       = new FileInputStream("c:\\data\\input.txt");
+Reader      inputStreamReader = new InputStreamReader(inputStream);
+
+int data = inputStreamReader.read();
+while(data != -1){
+    char theChar = (char) data;
+    data = inputStreamReader.read();
+}
+
+inputStreamReader.close();
+example :
+InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+BufferedReader reader = new BufferedReader(isr)
+{
+
+      String str;
+      while ((str = reader.readLine()) != null) {
+          System.out.println(str);
+      }
+
+
+
+FileReader
+File Reader is subclass: to read file in character
+Reader reader = new FileReader("/path/to/file/thefile.txt");
+
+
+
+char[] theChars = new char[128];
+
+int charsRead = reader.read(theChars, 0, theChars.length);
+while(charsRead != -1) {
+    System.out.println(new String(theChars, 0, charsRead));
+    charsRead = reader.read(theChars, 0, theChars.length);
+}
+
+BufferReader
+
+Reader reader =
+    new BufferedReader(
+        new FileReader("/path/to/file/thefile.txt"));
+
+int theCharNum = reader.read();
+while(theCharNum != -1) {
+    char theChar = (char) theCharNum;
+
+    System.out.print(theChar);
+
+    theCharNum = reader.read();
+}
+
+
+StringReader
+The Java StringReader class enables you to turn an ordinary String into a Reader
+
+
+JavaWriter:
+A Writer is like an OutputStream except that it is character based rather than byte based.
+
+
+OutputStream:
+The Java OutputStreamWriter class, java.io.OutputStreamWriter, is intended to wrap an Java OutputStream
+and thereby turning the byte based output stream into a character based Writer.
+
+OutputStream       outputStream       = new FileOutputStream("c:\\data\\output.txt");
+OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+
+outputStreamWriter.write("Hello World");
+
+outputStreamWriter.close();
+
+
+FileWriter::
+The Java FileWriter class, java.io.FileWriter, makes it possible to write characters to a file.
+In that respect the Java FileWriter works much like the FileOutputStream
+except that a FileOutputStream is byte based, whereas a FileWriter is character based.
+
+Overwriting vs. Appending the File
+When you create a Java FileWriter you can decide if you want to overwrite any existing file with the same name,
+or if you want to append to any existing file. You decide that by choosing what FileWriter constructor you use.
+
+Writer fileWriter = new FileWriter("c:\\data\\output.txt", true);  //appends to file
+
+Writer fileWriter = new FileWriter("c:\\data\\output.txt", false); //overwrites file
+
+BufferWriter:
+int bufferSize = 8 * 1024;
+
+BufferedWriter bufferedWriter =
+    new BufferedWriter(
+        new FileWriter("c:\\data\\output-file.txt"),
+            bufferSize);
+
+
+Example:
+
+byte[] to String (text data)
+
+getByte (( example       byte[] bytes = str.getBytes(StandardCharsets.UTF_8); ))
+ String s = new String(bytes, StandardCharsets.UTF_8);
+
+ Example 2:
+
+ Convert byte[] to String (binary data)
+
+ The below example converts an image phone.png into a byte[],
+ and uses the Java 8 Base64 class to convert the byte[] to a Base64 encoded String.
+ Later, we convert the Base64 encoded string back to the original byte[]
+ and save it into another image named phone2.png.
+
+//read the file/ image in byte array
+   byte[] bytes = Files.readAllBytes(path);
+   //convert the byte into bindary data with encder
+               String s = Base64.getEncoder().encodeToString(bytes);
+               byte[] decode = Base64.getDecoder().decode(s);
+                Files.write(Paths.get("/Users/mkyong/phone2.png"), decode);
+
+
+https://mkyong.com/java/how-do-convert-byte-array-to-string-in-java/
+https://mkyong.com/java/how-to-write-an-image-to-file-imageio/
+
+====================================================================================
+Files:
+ BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+  List<String> list = Files.readAllLines(path, StandardCharsets.UTF_8);
+   Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8);
+
+
+
+ try (FileOutputStream fos = new FileOutputStream(file);
+       OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+       BufferedWriter writer = new BufferedWriter(osw)) {
+
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
+ try (FileWriter fw = new FileWriter(new File(fileName), StandardCharsets.UTF_8);
+             BufferedWriter writer = new BufferedWriter(fw)) {
+
+            for (String line : lines) {
+                writer.append(line);
+                writer.newLine();
+            }

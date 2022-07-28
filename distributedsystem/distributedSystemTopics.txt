@@ -1,0 +1,5 @@
+12. Need for micro-services, diff between monolithic and micro-services
+13. Design of MS in the project
+14. Eureka service and it's usage
+15. API gateway usage
+16. Handling security stuffs in MS

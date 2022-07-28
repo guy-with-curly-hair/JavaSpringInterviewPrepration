@@ -1,0 +1,45 @@
+Completable future
+run in different thread then main app and use Global Fork.Join Pool
+
+
+Option 1 :
+Run a task which wont return anything & this will run totally indepently...!!
+where in callable one since either we wud be using executer or we are using thead to run so main app must wait for it completion...
+eg:CompletableFuture.runAsync()  --> this will return void
+
+
+Option 2:
+completable future return future then use CompletableFuture.supplyAsync(() which will return the value afer it execution
+& if you do completablefututre.get //call will blocked...
+
+
+option 3:
+Ypu want to run multiple operation one after other then u can chain in completable future...
+CompletableFuture
+--thenApply ( when one CF is dpende on other & want to return something..
+--then Accept ( will accept input from another CF but wont return anythung
+--thenRun ( will run independetly once parent CF copleted & wont return anything )
+
+
+if you want to combine something over another CF Th use can
+
+incase of depdndent tasks
+--Composeof of CF this will chain the multiple CFs one after other & will pass then  result to pne another in order..
+
+--if your 2 tasks are idnependent & 3rd depends upon first 2 the we can use combineOf..
+
+      System.out.println("Calculating BMI.");
+        CompletableFuture<Double> combinedFuture = weightInKgFuture
+                .thenCombine(heightInCmFuture, (weightInKg, heightInCm) -> {
+                    Double heightInMeter = heightInCm/100;
+                    return weightInKg/(heightInMeter*heightInMeter);
+                });
+
+
+
+---CFs Allof & AnyOFF...
+if you have multiple jobs but u need output from any one then ucase use anyOf
+        CompletableFuture<Object> anyOfFuture = CompletableFuture.anyOf(future1, future2, future3);
+
+
+https://www.callicoder.com/java-8-completablefuture-tutorial/

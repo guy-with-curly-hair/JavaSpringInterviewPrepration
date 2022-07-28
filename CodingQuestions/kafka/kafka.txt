@@ -1,0 +1,34 @@
+Kafka
+
+
+Topics
+Partition
+offsets
+
+Brokers
+topics
+partition
+
+
+Producer & message keys
+
+COnsumer & consumer groups
+
+consumer offsets
+commiting offsets
+
+delivery semantics for consumers
+
+
+Kafka Broker Discovery
+
+
+zookeeper
+
+Kafka Guarantees
+
+Kafka producer configs
+
+Kafka Consumer configs
+
+Kafka Consumer Idempotent
