@@ -865,4 +865,111 @@ EntityManagerFactoryFactory factory = new EntityManagerFactoryFactory(dsFactory,
 good Link : https://medium.com/@jerolba/persisting-fast-in-database-1af4a281e3a
 
 
+HIbernete ( ORM reltional mapping )
+
+how does hibenrete do query in databse
+
+HQL based / repository based
+String hql = "FROM com.hibernatebook.criteria.Employee";
+Query query = session.createQuery(hql);
+List results = query.list();
+
+https://www.tutorialspoint.com/hibernate/hibernate_query_language.htm
+
+Spring based HIbernete
+https://stackoverflow.com/questions/54507552/how-to-join-results-of-multiple-tables-in-spring-jpa-repository
+https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-three-custom-queries-with-query-methods/
+
+Hibernete Named Query
+Creating Database Queries With Named Querie
+
+Entity
+@NamedNativeQuery(name = "Todo.findBySearchTermNamedNative",
+        query="SELECT * FROM todos t WHERE " +
+                "LOWER(t.title) LIKE LOWER(CONCAT('%',:searchTerm, '%')) OR " +
+                "LOWER(t.description) LIKE LOWER(CONCAT('%',:searchTerm, '%'))",
+        resultClass = Todo.class
+)
+@NamedQuery(name = "Todo.findBySearchTermNamed",
+        query = "SELECT t FROM Todo t WHERE " +
+                "LOWER(t.title) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+                "LOWER(t.description) LIKE LOWER(CONCAT('%', :searchTerm, '%'))"
+)
+@Table(name = "todos")
+final class Todo {
+
+}
+Creating Database Queries With the @Query Annotation
+
+interface TodoRepository extends Repository<Todo, Long> {
+
+    @Query("SELECT t FROM Todo t WHERE t.title = 'title'")
+    public List<Todo> findById();
+}
+Link : https://thorben-janssen.com/spring-data-jpa-query-annotation/
+
+sorting the result
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+
+    @Query("FROM Author WHERE firstName = ?1")
+    List<Author> findByFirstName(String firstName, Sort sort);
+}
+//way 2
+ort sort = new Sort(Direction.ASC, "firstName");
+List<Author> authors = authorRepository.findByFirstName("Thorben", sort);
+
+Pageable
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+
+    @Query("FROM Author WHERE firstName = ?1")
+    List<Author> findByFirstName(String firstName, Pageable pageable);
+}
+ageable pageable = PageRequest.of(0, 10);
+List<Author> authors = authorRepository.findByFirstName("Thorben", pageable);
+
+Defining a Custom Native Query
+Similar to the custom JPQL query, you can use the @Query annotation to specify a custom native SQL query. But you need to tell Spring Data JPA, that you are defining a native query, so that it can execute the query in the right way. You can do that by setting the nativeQuery attribute of the @Query annotation to true.
+
+
+
+Native Querries
+https://thorben-janssen.com/jpa-native-queries/
+Similar to the custom JPQL query, you can use the @Query annotation to specify a custom native SQL query. But you need to tell Spring Data JPA, that you are defining a native query, so that it can execute the query in the right way. You can do that by setting the nativeQuery attribute of the @Query annotation to true.
+
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+
+    @Query(value = "SELECT * FROM author WHERE first_name = :firstName", nativeQuery = true)
+    List<Author> findAuthorsByFirstName(@Param("firstName") String firstName);
+}
+The query that you provide as the value of the annotation will not be parsed or changed by your JPA implementation. It gets directly send to your database. So, you need to make sure that you provide a valid SQL statement and follow the specific dialect of your database.
+
+
+Parameter Handling
+To use both kinds of queries with Spring Data JPA, you need to be familiar with bind parameters. Bind parameters act as placeholders in your query for which you can set values before the query gets executes. They are regularly used in the WHERE clause of a query. You should always prefer them over inlining a parameter value because bind parameters:
+
+prevent SQL injection vulnerabilities,
+get automatically converted to the correct SQL type and
+enable your persistence provider and database to optimize your query.
+Spring Data JPA handles the bind parameters of JPQL and native SQL queries in the same way. For each query, you can choose if you want to use positional or named bind parameters.
+
+Very Good link : https://thorben-janssen.com/spring-data-jpa-query-annotation/
+
+Spring Data JPA provides multiple options to define a query on your repository interface. You can:
+
+use derived queries for which Spring Data JPA generates the required query based on the name of the repository method. I explained that in great details in a previous tutorial.
+use the @Query annotation to define your own query. That’s what we discussed in this article.
+reference a named query which you specified on one of your entities. We will take a closer look at that in a future tutorial.
+By using the @Query annotation, you get full control over the executed query. You can choose between a native SQL or a JPQL query. By default, Spring Data JPA expects that you provide a JPQL query. If you want to execute a native query, you need to set the nativeQuery parameter of the @Query annotation to true.
+
+Both kinds of queries get processed by the underlying JPA implementation. That enables you to reuse all your Hibernate and EclipseLink knowledge and to use the query features supported by these frameworks.
+
+You can also specify modifying queries which insert, update, or remove records from the database. Spring Data JPA needs to generate a slightly different JPA code for these. You, therefore, need to annotate repository methods that execute modifying queries with the @Modifying annotation.
+
+
+
+
+
+
+
+
 

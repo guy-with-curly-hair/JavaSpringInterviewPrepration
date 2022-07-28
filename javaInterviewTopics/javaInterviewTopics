@@ -1,5 +1,46 @@
 Java 8
 
+Can we serialize Stream<Object>
+
+
+
+Java Streams
+streams are wrappers around a data source, allowing us to operate with that data source and making bulk processing convenient and fast.
+A stream does not store data and, in that sense, is not a data structure. It also never modifies the underlying data source.
+upports functional-style operations on streams of elements, such as map-reduce transformations on collections.
+Stream is lazy and evaluates code only when required.
+The elements of a stream are only visited once during the life of a stream. Like an Iterator, a new stream must be generated to revisit the same elements of the source.
+
+
+
+Important
+Distibuted cache ( LR U ) code
+
+Java Streams & thread limitation
+parallelStream
+i think it uses global forkjoin threadpool for its execution
+The default processing that occurs in such a Stream uses the ForkJoinPool. commonPool(), a thread pool shared by the entire application.
+
+how to use custom thread pool for parallelStrerams
+
+final int parallelism = 4;
+ForkJoinPool forkJoinPool = null;
+try {
+    forkJoinPool = new ForkJoinPool(parallelism);
+    final List<Integer> primes = forkJoinPool.submit(() ->
+        // Parallel task here, for example
+        IntStream.range(1, 1_000_000).parallel()
+                .filter(PrimesPrint::isPrime)
+                .boxed().collect(Collectors.toList())
+    ).get();
+    System.out.println(primes);
+} catch (InterruptedException | ExecutionException e) {
+    throw new RuntimeException(e);
+} finally {
+    if (forkJoinPool != null) {
+        forkJoinPool.shutdown();
+    }
+}
 
 
 
@@ -25,11 +66,12 @@ factory
 Strategy
 
 Have seen:
-proxy pattern
-decorator pattern
-abstract factory
-builder pattern
-Observer pattern ( https://www.tutorialspoint.com/design_pattern/observer_pattern.htm )
+proxy pattern  : spring AOP
+decorator pattern  : payment time or dominnoz pizza in making
+abstract factory : Spring IOC
+builder pattern  : datasource initilisation in spring
+
+ )
 
 
 
@@ -1444,6 +1486,303 @@ Under game, there will be two rows, one each for attributes and operations
 Link : https://www.baeldung.com/java-management-extensions
 
 
+used Design Pattern
+Visitor:
+
+public interface ItemElement {
+
+	public int accept(ShoppingCartVisitor visitor);
+}
+public class Book implements ItemElement {
+public class Fruit implements ItemElement {
+
+public interface ShoppingCartVisitor {
+
+	int visit(Book book);
+	int visit(Fruit fruit);
+}
+
+public class ShoppingCartVisitorImpl implements ShoppingCartVisitor {
+
+	@Override
+	public int visit(Book book) {
+		int cost=0;
+		//apply 5$ discount if book price is greater than 50
+		if(book.getPrice() > 50){
+			cost = book.getPrice()-5;
+		}else cost = book.getPrice();
+		System.out.println("Book ISBN::"+book.getIsbnNumber() + " cost ="+cost);
+		return cost;
+	}
+
+	@Override
+	public int visit(Fruit fruit) {
+		int cost = fruit.getPricePerKg()*fruit.getWeight();
+		System.out.println(fruit.getName() + " cost = "+cost);
+		return cost;
+	}
+
+}
+
+public class ShoppingCartClient {
+
+	public static void main(String[] args) {
+		ItemElement[] items = new ItemElement[]{new Book(20, "1234"),new Book(100, "5678"),
+				new Fruit(10, 2, "Banana"), new Fruit(5, 5, "Apple")};
+
+		int total = calculatePrice(items);
+		System.out.println("Total Cost = "+total);
+	}
+
+	private static int calculatePrice(ItemElement[] items) {
+		ShoppingCartVisitor visitor = new ShoppingCartVisitorImpl();
+		int sum=0;
+		for(ItemElement item : items){
+			sum = sum + item.accept(visitor);
+		}
+		return sum;
+	}
+
+}
+
+
+Stretegy Pattern
+public interface PaymentStrategy {
+
+	public void pay(int amount);
+}
+
+public class CreditCardStrategy implements PaymentStrategy { an have different constructor }
+public class PaypalStrategy implements PaymentStrategy { can have different constructor }
+public class ShoppingCart {
+
+	//List of items
+	List<Item> items;
+
+	public ShoppingCart(){
+		this.items=new ArrayList<Item>();
+	}
+
+	public void addItem(Item item){
+		this.items.add(item);
+	}
+
+	public void removeItem(Item item){
+		this.items.remove(item);
+	}
+
+	public int calculateTotal(){
+		int sum = 0;
+		for(Item item : items){
+			sum += item.getPrice();
+		}
+		return sum;
+	}
+
+	public void pay(PaymentStrategy paymentMethod){
+		int amount = calculateTotal();
+		paymentMethod.pay(amount);
+	}
+}
+
+public class ShoppingCartTest {
+
+	public static void main(String[] args) {
+		ShoppingCart cart = new ShoppingCart();
+
+		Item item1 = new Item("1234",10);
+		Item item2 = new Item("5678",40);
+
+		cart.addItem(item1);
+		cart.addItem(item2);
+
+		//pay by paypal
+		cart.pay(new PaypalStrategy("myemail@example.com", "mypwd"));
+
+		//pay by credit card
+		cart.pay(new CreditCardStrategy("Pankaj Kumar", "1234567890123456", "786", "12/15"));
+	}
+
+}
+
+
+Observer Pattrern
+
+Observer pattern ( https://www.tutorialspoint.com/design_pattern/observer_pattern.htm
+
+
+Singleton pattern
+
+public class mySingelton{
+
+private static volatile mySingelton _instance ;
+//eager
+private static mySingelton _instance = new mySingelton() ;
+
+
+private mySingelton()
+{}
+
+
+public static mySingelton getmySingelton()
+{
+if ( _instance == null )
+syncronized(mySingelton.class)
+{
+if ( _instance == null )
+return new  mySingelton();
+
+}
+return _instance;
 
 
 
+
+}
+
+
+Employe
+//id :int
+//name :String
+//address : Address
+
+
+public int hasCode()
+{
+return  id.hashCode() + name.hashCode;
+}
+
+pubic boolean equals( Object ob )
+{
+
+if ( ob == null)
+return false
+
+if ( ob.class != this.class)
+return false;
+
+if ( ob is instance of Employe.class)
+{
+
+Employee e = (EMploye) ob;
+
+return e.id == this.id && e.name == tis.name && e.address.equals(this.address);
+}
+
+return false;
+
+builder pattern
+
+public class User
+{
+	//All final attributes
+	private final String firstName; // required
+	private final String lastName; // required
+	private final int age; // optional
+	private final String phone; // optional
+	private final String address; // optional
+
+	private User(UserBuilder builder) {
+		this.firstName = builder.firstName;
+		this.lastName = builder.lastName;
+		this.age = builder.age;
+		this.phone = builder.phone;
+		this.address = builder.address;
+	}
+
+	//All getter, and NO setter to provde immutability
+	public String getFirstName() {
+		return firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public int getAge() {
+		return age;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public String getAddress() {
+		return address;
+	}
+
+	@Override
+	public String toString() {
+		return "User: "+this.firstName+", "+this.lastName+", "+this.age+", "+this.phone+", "+this.address;
+	}
+
+	public static class UserBuilder
+	{
+		private final String firstName;
+		private final String lastName;
+		private int age;
+		private String phone;
+		private String address;
+
+		public UserBuilder(String firstName, String lastName) {
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+		public UserBuilder age(int age) {
+			this.age = age;
+			return this;
+		}
+		public UserBuilder phone(String phone) {
+			this.phone = phone;
+			return this;
+		}
+		public UserBuilder address(String address) {
+			this.address = address;
+			return this;
+		}
+		//Return the finally consrcuted User object
+		public User build() {
+			User user =  new User(this);
+			validateUserObject(user);
+			return user;
+		}
+		private void validateUserObject(User user) {
+			//Do some basic validations to check
+			//if user object does not break any assumption of system
+		}
+	}
+}
+
+UserBuilder Example
+public static void main(String[] args)
+{
+	User user1 = new User.UserBuilder("Lokesh", "Gupta")
+	.age(30)
+	.phone("1234567")
+	.address("Fake address 1234")
+	.build();
+
+	System.out.println(user1);
+
+	User user2 = new User.UserBuilder("Jack", "Reacher")
+	.age(40)
+	.phone("5655")
+	//no address
+	.build();
+
+	System.out.println(user2);
+
+	User user3 = new User.UserBuilder("Super", "Man")
+	//No age
+	//No phone
+	//no address
+	.build();
+
+	System.out.println(user3);
+}
+
+Link : https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/
+
+
+Other
+
+
+
+
+Self learned desig

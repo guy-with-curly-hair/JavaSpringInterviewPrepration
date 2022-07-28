@@ -1,3 +1,17 @@
+Employer does nt implement comprable & we have not give comperator in treeMap
+
+TreeMap<Employer,String> map = new TreeMap<>();
+        map.put(e3,"1`");
+
+ Exception in thread "main" java.lang.ClassCastException: class GSEmployer cannot be cast to class java.lang.Comparable (GSEmployer is in unnamed module of loader 'app'; java.lang.Comparable is in module java.base of loader 'bootstrap')
+
+        TreeMap<String,String> map1 = new TreeMap<>();
+        map1.put("C","Imhere");
+        map1.put("B","Imhere");
+
+        it will sort based on key in ascendeing order or natural ordering of key
+
+
 
 —-Create Spring array;
 
