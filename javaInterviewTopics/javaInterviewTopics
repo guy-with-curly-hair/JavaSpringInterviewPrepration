@@ -1,5 +1,40 @@
 Java 8
 
+
+
+
+
+SOLID principles:
+Single responsibility
+open for extension & closed for modification
+L: LisKov Substituion
+I:Interface segragation
+D:Dependency Injection
+
+Design patter
+ type:
+   creational
+   behavioral
+   structural
+
+Name:
+Worked On:
+Visitor
+Singleton
+factory
+Strategy
+
+Have seen:
+proxy pattern
+decorator pattern
+abstract factory
+builder pattern
+Observer pattern ( https://www.tutorialspoint.com/design_pattern/observer_pattern.htm )
+
+
+
+
+
 Java Pattern & Mathcher
 ¯
 Matcher class
@@ -1370,6 +1405,43 @@ This is for user/humans
 
 		String data = new String(Files,readAllBytes(Paths.get(file path)); 
 
+Java Management Extensions (JMX) framework
+It provides an easily configurable, scalable, reliable and more or less friendly infrastructure for managing Java application either locally or remotely.
+The framework introduces the concept of MBeans for real-time management of applications.
+JMX Architecture
+JMX architecture follows a three-layered approach:
+
+Instrumentation layer: MBeans registered with the JMX agent through which resources are managed
+JMX agent layer: the core component (MbeanServer) which maintains registry of managed MBeans and provides an interface to access them
+Remote management layer: usually client side tool like JConsole
+
+Lets create mBean
+ublic interface GameMBean {
+    public void playFootball(String clubName);
+    public String getPlayerName();
+    public void setPlayerName(String playerName);
+}
+public class Game implements GameMBean //implemented version of interface
+
+try {
+    ObjectName objectName = new ObjectName("com.baeldung.tutorial:type=basic,name=game");
+    MBeanServer server = ManagementFactory.getPlatformMBeanServer();
+    server.registerMBean(new Game(), objectName);
+} catch (MalformedObjectNameException | InstanceAlreadyExistsException |
+        MBeanRegistrationException | NotCompliantMBeanException e) {
+    // handle exceptions
+}
+Accessing the MBean
+5.1. Connecting from the Client Side
+Start the application in the Eclipse
+Start Jconsole (located in the bin folder of the JDK installation directory of your machine)
+Connection -> new Connection -> select the local Java process of this tutorial -> Connect ->Insecure SSl connection warning -> Continue with insecure connection
+After connection is established, click on the top right MBeans tab of the View pane
+List of registered MBeans will appear in left column
+Click com.baeldung.tutorial -> basic -> game
+Under game, there will be two rows, one each for attributes and operations
+
+Link : https://www.baeldung.com/java-management-extensions
 
 
 

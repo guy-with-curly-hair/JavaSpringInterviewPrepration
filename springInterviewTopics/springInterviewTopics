@@ -1,5 +1,17 @@
 Spring Interview Topics:
 
+stereotype annotations in spring are @Component, @Service, @Repository, and @Controller.
+ @Component is a class-level annotation. It is used to denote a class as a Component.
+
+n spring autowiring, @Autowired annotation handles only wiring part.
+ We still have to define the beans so the container is aware of them and can inject them for us.
+
+With @Component, @Repository, @Service and @Controller annotations in place and automatic component scanning enabled,
+Spring will automatically import the beans into the container and inject to dependencies. These annotations are called Stereotype annotations as well.
+
+Enable component scanning
+applicationContext.xml
+<context:component-scan base-package="com.howtodoinjava.demo.service" />
 
 REST API vs MQ
 Sync vs async
@@ -723,6 +735,134 @@ And when we call delete on persistent entity it will make it to transient
 
 Detached to Persistence can be done by save/saveOrUpdate/metge/lock
 
+
+EntityManagerFactory (1)-> (*) EntityManager (1) -> 1()Transaction Manager( Platform txnManager )
+Every repo will have it 1 entity maanger class & 1 transaction mgr class asscoaited
+
+Jdbc template method:
+ template.query()
+ template.queryForList()
+ template.queryForObject()
+
+         return jdbcTemplate.query(
+                 sql,
+                 (rs, rowNum) ->
+                         new Customer(
+                                 rs.getLong("id"),
+                                 rs.getString("name"),
+                                 rs.getInt("age"),
+                                 rs.getTimestamp("created_date").toLocalDateTime()
+                         )
+         );
+
+
+
+
+
+
+
+𝐒𝐩𝐫𝐢𝐧𝐠 𝐁𝐨𝐨𝐭 𝐀𝐜𝐭𝐮𝐚𝐭𝐨𝐫 - 𝐂𝐮𝐬𝐭𝐨𝐦 𝐄𝐧𝐝𝐩𝐨𝐢𝐧𝐭𝐬
+
+🟥𝐒𝐩𝐫𝐢𝐧𝐠 𝐁𝐨𝐨𝐭 𝐀𝐜𝐭𝐮𝐚𝐭𝐨𝐫 is the most important Spring sub-project required when we are deploying our
+Spring Boot application to production because it brings support out of the box to monitor and manage our application.
+
+Basically is the same thing as creating a @𝐑𝐞𝐬𝐭𝐂𝐨𝐧𝐭𝐫𝐨𝐥𝐥𝐞𝐫, but with different annotations, and the web requests are delivered through the /𝐚𝐜𝐭𝐮𝐚𝐭𝐨𝐫/𝐞𝐧𝐝𝐩𝐨𝐢𝐧𝐭-𝐢𝐝 path.
+
+➡️In Spring Boot 2 we can do that using @𝐄𝐧𝐝𝐩𝐨𝐢𝐧𝐭 annotation which combines the power of JMX(@𝐉𝐦𝐱𝐄𝐧𝐝𝐩𝐨𝐢𝐧𝐭) and Web(@𝐖𝐞𝐛𝐄𝐧𝐝𝐩𝐨𝐢𝐧𝐭) technologies.
+
+➡️Using @𝐉𝐦𝐱𝐄𝐧𝐝𝐩𝐨𝐢𝐧𝐭 instead of @𝐄𝐧𝐝𝐩𝐨𝐢𝐧𝐭 will make your endpoint available only for JMX calls, and @𝐖𝐞𝐛𝐄𝐧𝐝𝐩𝐨𝐢𝐧𝐭 will make your endpoint only through web calls.
+
+➡️Through this actuator endpoint you have the possibility to send read(@𝐑𝐞𝐚𝐝𝐎𝐩𝐞𝐫𝐚𝐭𝐢𝐨𝐧), write(@𝐖𝐫𝐢𝐭𝐞𝐎𝐩𝐞𝐫𝐚𝐭𝐢𝐨𝐧), and delete(@𝐃𝐞𝐥𝐞𝐭𝐞𝐎𝐩𝐞𝐫𝐚𝐭𝐢𝐨𝐧) requests.
+
+
+
+How & what is the fasted way to update 1M records in db ?
+This is absolutely a viable approach, and one we have used repeatedly. One of our apps updates a table of several hundred million records.
+
+The cursor..For loop approach for the update was calculated to take 53.7 years to complete!
+We institued the Insert into a dummy table append with nologging, and were able to complete the "update" in under 30 minutes.
+
+With nologging, if the system aborts, you simply re-run the 'update' again, as you have the original data in the main table. When done, we swap the partition of original data with the 'dummy' table (the one containing new values), rebuild indexes in parallel, and wha-la! Our update is complete.
+
+i.e, to update field2 in a table:
+
+1) First create your dummy hold table: create table xyz_HOLD as select * from xyz where rownum<1. Alter tablexyz nologging.
+
+2) insert /*+ append parallel (xyzhold,12) */ into xyz_hold xyzhold (field1, field2, field3) select /*+ parallel (x,12) */ xyz.field1, my_new_value_for_field2, xyz.field3 from xyz x where blah blah blah.
+
+3) when done, either rename the table, or swap the partition if your original table is partitioned, and you only updated one partition as we do. Obviously you need to rebuild indecies, etc as required.
+
+Hope this helps!
+
+
+How to persist the information in the database as fast as possible (without losing data of course),
+and in particular, to persist new information (INSERT), not to update it (UPDATE).
+
+
+JPA /Hibernate
+
+A register each time
+EntityTransaction tx = entityManager.getTransaction();
+Iterator<TripEntity> iterator = trips.iterator();
+while (iterator.hasNext()) {
+    tx.begin();
+    entityManager.persist(iterator.next());
+    tx.commit();
+}
+
+Improved version:
+ A register each time in transactions of 1000 elements
+
+ EntityTransaction tx = entityManager.getTransaction();
+ Iterator<TripEntity> iterator = trips.iterator();
+ tx.begin();
+ int cont = 0;
+ while (iterator.hasNext()) {
+     entityManager.persist(iterator.next());
+     cont++;
+     if (cont % batchSize == 0) {
+         tx.commit();
+         tx.begin();
+     }
+ }
+ tx.commit();
+
+
+3.- Flush
+By the way Hibernate works (and the rest of JPA implementations), to do all its magic you need to track all the entities that go through it. All these entities are managed by the EntityManager, maintaining the uniqueness of instances, their status, and their life cycle.
+
+The more records you persist, the more entities end up in the EntityManager, the more memory they consume and the more objects it has to manage when doing certain operations. One of them is the flush, and JPA executes it, for example, every time we execute a commit.
+
+Therefore, if you are going to persist many records, you will not be interested in having them all in context, and you will be able to clean them up often, by explicitly executing the flush and clear operations from EntityManager.
+
+EntityTransaction tx = entityManager.getTransaction();
+Iterator<TripEntity> iterator = trips.iterator();
+tx.begin();
+int cont = 0;
+while (iterator.hasNext()) {
+    entityManager.persist(iterator.next());
+    cont++;
+    if (cont % batchSize == 0) {
+        entityManager.flush();
+        entityManager.clear();
+        tx.commit();
+        tx.begin();
+    }
+}
+tx.commit();
+
+4.- In batches of 1000 records
+
+EntityManagerFactoryFactory factory = new EntityManagerFactoryFactory(dsFactory, TripEntity.class) {
+    @Override
+    public Properties properties() {
+        Properties properties = super.properties();
+        properties.put("hibernate.jdbc.batch_size", batchSize);
+        return properties;
+    }
+};
+
+good Link : https://medium.com/@jerolba/persisting-fast-in-database-1af4a281e3a
 
 
 

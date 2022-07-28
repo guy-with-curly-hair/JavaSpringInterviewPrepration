@@ -1,0 +1,5 @@
+time related terms
+Sec 1 Millisec 10^-3 Microsec 10^-6 Nsec 10^-9
+
+
+
