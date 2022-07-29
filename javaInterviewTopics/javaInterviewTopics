@@ -1,5 +1,14 @@
 Java 8
 
+abstract classes & interface
+main difference is areound access modifier
+interface can have public modifier for methods & also member variable can be intialised one & are final
+we cannot dfine constructor into interface whereas
+abstract classes we have full constrol on access modifiers
+& we can have partial state of object and so constructor is provided to abstract classes
+The purpose of interface is to provide full abstraction, while the purpose of abstract class is to provide partial abstraction.
+
+
 Can we serialize Stream<Object>
 No since it dont extend serialiaazble interface
 public interface Stream<T> extends BaseStream<T, Stream<T>> {
