@@ -1,6 +1,9 @@
 Java 8
 
 Can we serialize Stream<Object>
+No since it dont extend serialiaazble interface
+public interface Stream<T> extends BaseStream<T, Stream<T>> {
+https://stackoverflow.com/questions/34748282/serializing-java-8-streams
 
 
 
