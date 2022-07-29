@@ -3,6 +3,13 @@ https://www.guru99.com/sql-vs-nosql.html
 https://www.guru99.com/dbms-concurrency-control.html
 https://www.freecodecamp.org/news/database-indexing-at-a-glance-bb50809d48bd/
 
+With a clustered index the rows are stored physically on the disk in the same order as the index. Therefore, there can be only one clustered index.
+
+With a non clustered index there is a second list that has pointers to the physical rows. You can have many non clustered indices,
+although each new index will increase the time it takes to write new records.
+
+link: https://stackoverflow.com/questions/1251636/what-do-clustered-and-non-clustered-index-actually-mean
+
 • Clustered/unclustered
 – Clustered = records close in index are close in data
 – Unclustered = records close in index may be far in data
@@ -36,7 +43,7 @@ but if you queries are just on zip so this index wont be used
 
 Very Good link
 https://use-the-index-luke.com/sql/where-clause/the-equals-operator/concatenated-keys
-
+https://www.sqlshack.com/what-is-the-difference-between-clustered-and-non-clustered-indexes-in-sql-server/
 
 DBMS Concurrency Control: Timestamp & Lock-Based Protocols
 https://www.guru99.com/dbms-concurrency-control.html
