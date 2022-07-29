@@ -965,6 +965,27 @@ Both kinds of queries get processed by the underlying JPA implementation. That e
 
 You can also specify modifying queries which insert, update, or remove records from the database. Spring Data JPA needs to generate a slightly different JPA code for these. You, therefore, need to annotate repository methods that execute modifying queries with the @Modifying annotation.
 
+PreparedStatement interface
+The PreparedStatement interface is a subinterface of Statement. It is used to execute parameterized query.
+Following are the advantages of the prepared statement:
+Executing the Prepared Statement
+Once you have created the PreparedStatement object you can execute it using one of the execute() methods of the PreparedStatement interface namely, execute(), executeUpdate() and, executeQuery().
+execute(): This method executes normal static SQL statements in the current prepared statement object and returns a boolean value.
+executeQuery(): This method executes the current prepared statement and returns a ResultSet object.
+executeUpdate(): This method executes SQL DML statements such as insert update or delete in the current Prepared statement. It returns an integer value representing the number of rows affected.
+By avoiding multiple compilation and execution of statements, prepared statements perform faster.
+Using prepared statements, we can insert values to advanced datatypes such as BLOB, CLOB, OBJECT easily with the help of the setter methods provided by the PreparedStatement interface.
+By providing setter method to set values prepared statement avoids the use of quotes and other special characters with in the query, and thereby it escapes the SQL injection attacks
+Following are the limitations of prepared statements:
+Since a PreparedStatement object represents only one SQL statement at a time, we can execute only one statement by one prepared statement object.
+To prevent injection attacks it does not allow more than one value to a place holder.
+
+Stored procedure type	JDBC method
+Stored procedure requires no IN or OUT parameters	Use a Statement object
+Stored procedure with IN parameters	Use a PreparedStatement object
+Stored procedure with IN and OUT parameters	Use a CallableStatement object
+
+Good link : https://developer.ibm.com/articles/dm-1209storedprocedures/
 
 
 

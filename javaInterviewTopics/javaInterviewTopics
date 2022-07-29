@@ -25,12 +25,12 @@ The elements of a stream are only visited once during the life of a stream. Like
 
 
 
-Important
-Distibuted cache ( LR U ) code
+Important design
+Distibuted cache ( LU ) code
 
 Java Streams & thread limitation
 parallelStream
-i think it uses global forkjoin threadpool for its execution
+ it uses global forkjoin threadpool for its execution
 The default processing that occurs in such a Stream uses the ForkJoinPool. commonPool(), a thread pool shared by the entire application.
 
 how to use custom thread pool for parallelStrerams
