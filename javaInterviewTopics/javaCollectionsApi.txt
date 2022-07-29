@@ -1,4 +1,26 @@
+String s = "k1-1,k2-1,k3-2,k4-3,k1-7";
+        Stream<String[]> st = Arrays.stream(s.split(",")).map(is -> is.split("-"));
+        Map<String , String > map= st.collect(Collectors.toMap(k->k[0] , k -> k[1],(o1,o2) -> o2));
+handeling duplicate key will sorted by merger function
+This is possible using the mergeFunction parameter of Collectors.toMap(keyMapper, valueMapper, mergeFunction):
+
+can choose 1 or give any lambda implementation
+like (o1, o2) -> o1 + o2
+
+or an choose either of 1 value (newvalue,oldvalue) -> newvalue)
+
+Stream of represention
+        int[] i = new int[] {1,2,3,4,5,6};
+        Stream<int[]> si = Stream.of(i);//when we do stream of then we pass multiple elemnt to it so here it like single element type int[]
+
+        int[] i1 = new int[] {1,2,3,4,5,6};
+        Stream<int[]> si1 = Stream.of(i,i1);
+
+
+
+
 Employer does nt implement comprable & we have not give comperator in treeMap
+
 
 TreeMap<Employer,String> map = new TreeMap<>();
         map.put(e3,"1`");

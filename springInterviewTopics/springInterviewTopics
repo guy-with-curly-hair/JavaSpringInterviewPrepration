@@ -968,6 +968,18 @@ You can also specify modifying queries which insert, update, or remove records f
 
 
 
+APIs required to call a third party api from your service.
+sometime restbased client & sometime its MQ communication
+
+Do you know about Feign Client? Explain
+client to call rest servicer from aother service
+Spring restbased remplated anoother with @LoadBalanced can also be used for communication
+
+Spring test
+
+Junit
+What are you using for mocking the rest template? Annotations used?
+How do you Mock DB?
 
 
 
