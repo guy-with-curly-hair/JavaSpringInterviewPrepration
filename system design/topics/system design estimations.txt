@@ -1,0 +1,20 @@
+Although data volume can become enormous when dealing with distributed systems,
+calculation all boils down to the basics.
+
+Power of two
+
+10 -> KB
+20 -> 1 MB
+30 -> 1 GB
+40 -> 1TB
+50 -> 1PB
+
+Latency numbers every programmer should know
+
+L1 cache 0.5 ns
+l2 cache 5 ns
+mutext lock unlock 100ns
+main memory refernce 100ns
+compress 1k byte 10 micro sec
+send 2kb byte ver 1 GBPS network 20 micro sec
+read 1 mb

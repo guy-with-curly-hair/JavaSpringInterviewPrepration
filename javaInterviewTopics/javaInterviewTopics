@@ -1794,7 +1794,17 @@ Link : https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-j
 
 Other
 
+JDBC
+ interface whch allows java code to execute SQl statements inside relation databses
+
+ java program --> jdbc
+ --driver for oracle
+ --driver for MYSql
+ --jdbc -odbc --> ODBC driver
 
 
+ Statements & resultset are based on DB side
 
-Self learned desig
+
+Ignite
+https://www.javacodegeeks.com/2018/10/apache-ignite-easy-java-application.html

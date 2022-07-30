@@ -1,8 +1,27 @@
-algoexpert content
-bytebytego content
-newpdfcontent
+--algoexpert content
+--bytebytego content
+--newpdfcontent
 
-distributed keywords/Topics:
+building blocks of system design
+Distributed Search
+Domad name system (DNS )
+Load Balancers
+Databases
+Key-value store
+content delivery network
+service Monitoring
+Distributed caching
+distributed messagin queue
+rate limitter
+Blob store
+Distribute Logging
+ Distributed Task Scheduling
+sequencer
+sharded counters
+
+
+
+AlgoExpert distributed keywords/Topics:
 
 Client-Server Model
 
@@ -12,14 +31,37 @@ Storage
 
 Latency & throughput
 
+latency
+Time taken by system to do different operations
+
+Reading 1 MB from
+RAm .25ms
+SSD  1ms
+trasnfer 1MB for network 10ms
+reading 1 BM from HDD 20ms
+Intercontinental round trip 150ms
+
+ThroughPut
+the number of operations that a system can handel properly per time unit.
+For instance the throughout of a server can often be measured in request per scond ( RPS or QPS )
+
+
+
 Availability
+of App is measured in terms of 9s
 
-Caching
-
+2 9s -> 99% -> means app wud have total downtime in year --> 87.7 hours
+3 9s --> 8.8 houes
+4 9s -> 52.6 om
+5 9s -> 5.3 minutes
+SLA -> service level agreement
+SLO -> service level objctive. it consist of SLA
 
 Proxies
 forward proxy ( proxy) > hides out client behind a server
-reverseProxy -> hides out s
+reverseProxy -> hides out srvers info, typically used for logging load balancing caching & rate limiting
+Nginx : often used as reverse proxy & ;apd balancer
+
 
 Load Balancer
 Reverse proxy since it hides out sever information from client
@@ -28,10 +70,83 @@ Can be of different Strategy like random,rounrobin,weightedRoundRobin,ipBased,us
 
 Hashing
 
+consistent hashing
+
+Rendezvous hashing
+
+SHA
+
 
 Relational Databases
 
 Key-value stores
+
+
+
+
+
+Security And Https
+
+if we go for only http based protocol we will have security issues of Dos ( Man in the middle attack
+Denail of security where hackers can intercept the network communication & can read or corrupt your data
+And that why security is introduced over http & send encrupted data
+there are two types of encryption
+1) Symmetric encryption  ( where same key will be used for encryption )
+2) Asymmetric encryption ( where publickey or provate key pair will be used ) ( data encrypted via public key can only be decrypt via pricate key
+Asymmetric encruption algo is bit slower than symmetric
+
+https servers to have trusted certificates ( usually ssl certs ) & uses the TLS , security protocol built on top of TCP to encrypt data communicated between a client & a server
+
+TLS security protocol overwhich http run for secures transfer
+
+SSL
+digital certificate granted by CA(certificate authority. Contains server public key, to be used for TLS handshake process in a HTTPs connection.
+it saved MAM attack while transfering public to client
+
+TLS handshake
+clent send hello -> server responds hello + ( ssl certificate contains Public key )
+client verifies CA authorized ssl & then encrypt its session key from oublic key & send it back to server
+now server will used this session key ( symmetirc encruption ) till the session last so it will be fast
+
+
+MapReduce
+gramework for processing very large datasets in ditributed seeting effeiciently , quickly & in a fault tolerant manner
+it has 3 steps :
+
+1) map step : which run map funtions on various chunks of dataset & transform these chunks into intermediate key-value pairs
+2) the shuffle step : which re-organizes the intermediate key-value such that pairs of same key are routed to same machine in final step
+3) reduce steps whch run reduce funtions on the newly shuffled key-value pairs & transfor them into more meaning ful data
+
+
+Distributed file system :
+
+abstraction of cluster of amchine that allows rthem  to act like lasrge system
+eg L Google file sytem & hadoop distributed FS .
+
+Typically DPFS take care of avability & replication that can be tricky to obtain in distributes system setting. The idea is that files are spplit into certain chunk size ( 4 mb or 64 mb )
+and those chubnks are shared across cluster of amchines , a ccetral control pandel is in charge of decising where each chunk resides routing eads to right nodes & handeling communiction b
+between ndoeos
+
+Haddop framework supports MapReduce jobs & many other kind of data prcessing pipelines
+
+
+Publish/Subscribe Pattern
+where publisher will publish & subscriber will lsiten
+
+operation/consumer sud be Idepmpotent in order to cater replay issues
+
+Apache Kafka is example of distributed pub/sub streaming platform rather than polling framework
+it support mulitple operation over delviery
+
+
+Logging Monitoring & Alerting
+
+
+
+
+
+
+
 
 
 

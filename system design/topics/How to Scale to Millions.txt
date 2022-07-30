@@ -1,0 +1,138 @@
+When your application has few visitor its fine with1 server 1 DB & u dont care about downtime but when your hot in market u cannot afford failures & unavailvility
+
+
+our system to support millions of users
+
+  Keep web tier stateless
+• Build redundancy at every tier
+• Cache data as much as you can
+• Support multiple data centers
+• Host static assets in CDN
+• Scale your data tier by sharding
+• Split tiers into individual services
+• HAVE SERVICES DECOUPLED via messaging queue or some other way
+
+
+
+Stateless web tier
+Now it is time to consider scaling the web tier horizontally. For this, we need to move state
+(for instance user session data) out of the web tier. A good practice is to store session data in
+the persistent storage such as relational database or NoSQL. Each web server in the cluster
+can access state data from databases. This is called stateless web tier.
+
+Stateful architecture
+A stateful server and stateless server has some key differences. A stateful server remembers
+client data (state) from one request to the next. A stateless server keeps no state information.
+
+it becomes dificult on scaling
+In this stateless architecture, HTTP requests from users can be sent to any web servers, which
+fetch state data from a shared data store. State data is stored in a shared data store and kept
+out of web servers. A stateless system is simpler, more robust, and scalable.
+
+
+
+nitor your system and use automation tools
+
+Database Scaling
+
+Sharding is a great technique to scale the database but it is far from a perfect solution. It
+introduces complexities and new challenges to the system:
+Resharding data: Resharding data is needed when
+
+1) a single shard could no longer hold
+more data due to rapid growth.
+2) Certain shards might experience shard exhaustion faster
+than others due to uneven data distribution. When shard exhaustion happens, it requires
+updating the sharding function and moving data around. Consistent hashing, which will be
+discussed in Chapter 5, is a commonly used technique to solve this problem.
+
+
+Celebrity problem: This is also called a hotspot key problem. Excessive access to a specific
+shard could cause server overload. Imagine data for Katy Perry, Justin Bieber, and Lady
+Gaga all end up on the same shard. For social applications, that shard will be overwhelmed
+with read operations. To solve this problem, we may need to allocate a shard for each
+celebrity. Each shard might even require further partition.
+
+
+Join and de-normalization: Once a database has been sharded across multiple servers, it is
+hard to perform join operations across database shards. A common workaround is to denormalize
+the database so that queries can be performed in a single table.
+
+
+
+Logging, metrics, automation
+
+Metrics: Collecting different types of metrics help us to gain business insights and understand
+the health status of the system. Some of the following metrics are useful:
+• Host level metrics: CPU, Memory, disk I/O, etc.
+• Aggregated level metrics: for example, the performance of the entire database tier, cache
+tier, etc.
+• Key business metrics: daily active users, retention, revenue, etc.
+
+
+
+multi-data center setup:
+• Traffic redirection: Effective tools are needed to direct traffic to the correct data center.
+GeoDNS can be used to direct traffic to the nearest data center depending on where a user
+is located.
+• Data synchronization: Users from different regions could use different local databases or
+caches. In failover cases, traffic might be routed to a data center where data is unavailable.
+A common strategy is to replicate data across multiple data centers. A previous study
+shows how Netflix implements asynchronous multi-data center replication [11].
+• Test and deployment: With multi-data center setup, it is important to test your
+website/application at different locations. Automated deployment tools are vital to keep
+services consistent through all the data centers [11].
+
+Redundency -> process of replicating to make it more reliable & fault tolerant
+SLA
+
+Caching
+has
+cache hit/miss / evixtion policies
+
+CDN ->
+CDN is third party service that acts like cache fro your servers .
+sometime web applicatins can be slow for users in a particular region if your servers are located only in another regions . A CDN has servers all around the world meaning that latency to CDN servers wil almost
+always be far better than your sevrs .
+CDNs are often referres as OOPs points of presence
+eg : Cloudfire & coogle Cloud CDN & Amazon S3
+
+Content delivery network (CDN)
+A CDN is a network of geographically dispersed servers used to deliver static content. CDN
+servers cache static content like images, videos, CSS, JavaScript files, etc.
+
+User A tries to get image.png by using an image URL. The URL’s domain is provided
+by the CDN provider. The following two image URLs are samples used to demonstrate
+what image URLs look like on Amazon and Akamai CDNs:
+• https://mysite.cloudfront.net/logo.jpg
+• https://mysite.akamai.com/image-manager/img/logo.jpg
+2. If the CDN server does not have image.png in the cache, the CDN server requests the
+file from the origin, which can be a web server or online storage like Amazon S3.
+3. The origin returns image.png to the CDN server, which includes optional HTTP header
+Time-to-Live (TTL) which describes how long the image is cached.
+4. The CDN caches the image and returns it to User A. The image remains cached in the
+CDN until the TTL expires.
+5. User B sends a request to get the same image.
+6. The image is returned from the cache as long as the TTL has not expired.
+
+Considerations of using a CDN
+• Cost: CDNs are run by third-party providers, and you are charged for data transfers in
+and out of the CDN. Caching infrequently used assets provides no significant benefits so
+you should consider moving them out of the CDN.
+• Setting an appropriate cache expiry: For time-sensitive content, setting a cache expiry
+time is important. The cache expiry time should neither be too long nor too short. If it is
+too long, the content might no longer be fresh. If it is too short, it can cause repeat
+reloading of content from origin servers to the CDN.
+• CDN fallback: You should consider how your website/application copes with CDN
+failure. If there is a temporary CDN outage, clients should be able to detect the problem
+and request resources from the origin.
+• Invalidating files: You can remove a file from the CDN before it expires by performing
+one of the following operations:
+• Invalidate the CDN object using APIs provided by CDN vendors.
+• Use object versioning to serve a different version of the object. To version an object,
+you can add a parameter to the URL, such as a version number. For example, version
+number 2 is added to the query string: image.png?v=2.
+
+
+
+
