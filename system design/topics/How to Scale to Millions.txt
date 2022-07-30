@@ -13,6 +13,12 @@ our system to support millions of users
 • HAVE SERVICES DECOUPLED via messaging queue or some other way
 
 
+and also secure your applciation
+with https security
+authentication at reverse proxy or gateway
+rate limiting
+
+
 
 Stateless web tier
 Now it is time to consider scaling the web tier horizontally. For this, we need to move state

@@ -71,19 +71,34 @@ Can be of different Strategy like random,rounrobin,weightedRoundRobin,ipBased,us
 Hashing
 
 consistent hashing
+where instead of using server numbers for parition
+we carete many virtual partition on based of server & we take out hash & go closckwise to get the server which wil handel it
+
 
 Rendezvous hashing
+heighest random weight hashing
+allows minimum re-distribute of mapppping when server go down
 
-SHA
+SHA secure hash algorithm
 
 
 Relational Databases
+follow ACID properties
+
+No Sql
+follow eventual consistency
+
 
 Key-value stores
 
 
+Storage
+Databsed
+In memory
 
-
+Disk
+HDD
+SSD
 
 Security And Https
 
@@ -139,8 +154,76 @@ Apache Kafka is example of distributed pub/sub streaming platform rather than po
 it support mulitple operation over delviery
 
 
-Logging Monitoring & Alerting
+Logging Monitoring & Alertin
 
+
+
+Rate Limiting
+Dos ( denial of service )
+the is famous attack called DoS where unwanted user send too many request to overlaod your serves so it will do fake processing and will not server other requests
+and so we need to apply rate lmiting on variaous attributes which can lead to DoS
+like user / browser session / ip based / region based
+
+Its become dificult to handel Distributes Dos since other amchine are not aware about no of request made my attackes on other system so rate limitign sud be apply at central level
+
+
+Redis is good option to implement rate limiting
+
+
+Polling And Streaming
+
+polling connection open, request for data & disconnect for some time
+streaming keep open the connection & consumer take the data as soon as it get publish by producer
+
+
+peer to peer networks
+this helps greatly in distbuting heavy files to many peers client
+
+where main source send chunks to its peer & peers to their peeers
+
+DC++ works on peer to peer network
+
+
+Leader Election :
+
+The process by which nodes in a cluster decide their leader responsible for primary operation of the service these
+nodes support
+it is done by concensus algorithm
+where multple entities agree on same value
+eg : Paxos & Raft
+
+Etcd & zookeeper both can help in leader election
+
+Replication
+
+Sharding
+
+Hotspot
+
+
+Special storage system
+
+Blob storage for lage data large binaries , snapshot or images
+eg :GCS or S3
+
+TimeSeries Database
+optimized ds for storing & analyzing time-indexed data. data points that occur at somespecifc time
+eg: promoethesu graphite InfluxDb
+
+Graph Database
+this db can handel relation ship based data & data is retrieved via cyphe graph query lagunage
+Neon4J
+
+Spatail databses relies on spatial index based on
+QuadTree omplementation
+tre based struture DS to store 2D spatial data
+
+temporal data ( time related data )
+
+
+KeyValue Databases/stores
+flexible NoSQL database often used for caching & dynamic configration
+Ecd redis zookeeper
 
 
 
