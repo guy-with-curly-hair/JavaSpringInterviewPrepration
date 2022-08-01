@@ -1808,3 +1808,61 @@ JDBC
 
 Ignite
 https://www.javacodegeeks.com/2018/10/apache-ignite-easy-java-application.html
+
+
+Thread running state
+
+new  ( new & had not started )
+Running ( RUnnable )
+Waiting  ( i think for getting CPU & also afer wait )
+Blocked      ( on object mnitor if lock via sync )
+timedWaiting    ( thead.sleep )
+terminated
+
+
+deign pattern
+
+command pattern
+
+stock
++buy
++sell
+
+
+
+order
+//constrctor will take type of order (order )
+execute()
+order.execute
+
+Buyorder
+
+execute
+stock.buy
+
+Sell order
+execute
+stock.sell
+
+Broker
+List<Order>
+
+execute
+list.execute();
+
+
+itrator
+just like collection iterator
+
+
+
+Facade
+
+its like
+many tyoe f guitar
+
+we will create interface where all object will be here
+
+& client just call which tune he want to play via api exposed
+
+

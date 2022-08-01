@@ -15,3 +15,9 @@
 //AbstarctBusinessPolicy ...validate() ....validatePolicy(){ validate();throw()} ... throw(){}
 //CashDepositbusinePolicy .... validate (){if debit..if succin}
 //CashDepositService ...depositCash() { CashDeBusPolicty.validatePolicy();
+
+
+high level design 
+api design ( so others can be unblcoked )
+
+low level design & db design 
