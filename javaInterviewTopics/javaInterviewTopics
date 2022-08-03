@@ -1,5 +1,35 @@
 Java 8
 
+Method hiding & Override the static method
+when statitc method is override in subclass but it wont be override but hide the super class functionality
+method with final method cannot be ovveride in child class
+
+Overloading
+method returnTypes & exception wont count in overloading params
+
+When overloaded with different type of params & calling is done on differnt object & if object
+typecasting can lead to amtch of the avaiable mthod then that method will be called
+
+abstract  static  using these together is illegal combination
+
+
+static method can be called via direct Class or via object as well
+
+calling static override/method hidden with differen refernce pointer & no override seen doing these
+
+        Parent p1 = new Child1();
+        //method overriding did not happen on static method referencce pointer will invole its method only.
+        //parent refernce pointer pointing to Child object , is calling static method which is define in chuld class as well
+        but parent class method is called since its compile time binding
+
+        p1.getFirstName();
+
+        Child1 c1 = new Child1();
+        //child static method  called via object & it call will go to child class
+        c1.getFirstName();
+
+
+
 abstract classes & interface
 main difference is areound access modifier
 interface can have public modifier for methods & also member variable can be intialised one & are final

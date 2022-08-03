@@ -1,5 +1,10 @@
 Spring Interview Topics:
 
+MDC context
+
+ThreadLocal
+
+
 stereotype annotations in spring are @Component, @Service, @Repository, and @Controller.
  @Component is a class-level annotation. It is used to denote a class as a Component.
 
