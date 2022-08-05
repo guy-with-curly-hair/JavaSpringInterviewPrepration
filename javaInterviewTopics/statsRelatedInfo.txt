@@ -1,0 +1,64 @@
+Unix command to get JVM & server laod
+
+1) jvmtop
+it provide a live view at several metrics including heap
+
+Jstat
+jstat is a simple utility tool, that is present in JDK to provide JVM performance-related statistics like garbage collection, compilation activities.
+
+
+
+Java Thread Dump
+Java thread dump is very helpful in analyzing bottlenecks in the application and deadlock situations.
+VisualVM Profiler: If you are analyzing application for slowness, you must use a profiler. We can generate thread dump for any process using VisualVM profiler very easily. You just need to right click on the running process and click on “Thread Dump” option to generate it.
+
+jstack: Java comes with jstack tool through which we can generate thread dump for a java process. This is a two step process.
+Find out the PID of the java process using ps -eaf | grep java command
+Run jstack tool as jstack PID to generate the thread dump output to console, you can append thread dump output to file using command “jstack PID >> mydumps.tdump“
+
+Java 8 has introduced jcmd utility. You should use this instead of jstack if you are on Java 8 or higher.
+ Command to generate thread dump using jcmd is jcmd PID Thread.print.
+
+thread Name: Name of the Thread
+Thread Priority: Priority of the thread
+Thread ID: Represents the unique ID of the Thread
+Thread Status: Provides the current thread state, for example RUNNABLE, WAITING, BLOCKED. While analyzing deadlock look for the blocked threads and resources on which they are trying to acquire lock.
+Thread callstack: Pr
+
+
+Java heap dump
+
+jmap is a tool to print statistics about memory in a running JVM. We can use it for local or remote processes.
+jmap -dump:[live],format=b,file=<file-path> <pid>
+
+2.2. jcmd
+jcmd is a very complete tool that works by sending command requests to the JVM. We have to use it in the same machine where the Java process is running.
+
+One of its many commands is the GC.heap_dump. We can use it to get a heap dump just by specifying the pid of the process and the output file path:
+
+jcmd <pid> GC.heap_dump <file-path>
+
+JVisualVM is a tool with a graphical user interface that lets us monitor, troubleshoot, and profile Java applications. The GUI is simple, but very intuitive and easy to use.
+
+One of its many options allows us to capture a heap dump. If we right-click on a Java process and select the “Heap Dump” option, the tool will create a heap dump and open it in a new tab:
+
+
+
+ Capture a Heap Dump Automatically
+ Java provides the HeapDumpOnOutOfMemoryError command-line option, which generates a heap dump when a java.lang.OutOfMemoryError is thrown:
+
+ java -XX:+HeapDumpOnOutOfMemoryError
+ By default, it stores the dump in a java_pid<pid>.hprof file in the directory where we're running the application. If we want to specify another file or directory, we can set it in the HeapDumpPath option
+
+ JMX
+ The last approach we'll cover in this article is using JMX. We'll use the HotSpotDiagnostic MBean that we briefly introduced in the previous section. This MBean provides a dumpHeap method that accepts two parameters:
+
+ outputFile: the path of the file for the dump. This file should have the hprof extension.
+ live: if set to true, it dumps only the active objects in memory, as we saw before with jmap.
+
+
+ JConsole
+ The easiest way to use the HotSpotDiagnostic MBean is by using a JMX client, such as JConsole.
+If we open JConsole and connect to a running Java process, we can navigate to the MBeans tab and find the HotSpotDiagnostic under com.sun.management. In operations, we can find the dumpHeap method that we previously described:
+
+

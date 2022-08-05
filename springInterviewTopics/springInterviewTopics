@@ -1,5 +1,29 @@
 Spring Interview Topics:
 
+http headers https://www.geeksforgeeks.org/http-headers/
+General Header: This type of headers applied on Request and Response headers both but with out affecting the database body.
+Request Header: This type of headers contains information about the fetched request by the client.
+Response Header: This type of headers contains the location of the source that has been requested by the client.
+Entity Header: This type of headers contains the information about the body of the resources like MIME type, Content-length.
+
+
+
+MIME type Multi-purpose Internet Mail Extensions.
+A MIME type is a label used to identify a type of data
+
+This is text/html" the client can go "Ah, this is an HTML document, I can render that internally",
+ "This is application/pdf" the client can go "Ah, I need to launch the
+  FoxIt PDF Reader plugin that the user has installed and that has registered itself as the application/pdf handler."
+
+bydefault sring boot application produces json but if you want to change default to xml then
+if jackson_XMl is in classpath jsut add produces annotation either at class level or at method
+produces = {MediaType.Application_XML_VALUE} & if you want to give multiple option u can give in produces tag via ,
+
+same way we can have consumes & these tags also restrict the ouput & inout given to your spring boot app.
+
+
+
+
 MDC context
 
 ThreadLocal
@@ -991,6 +1015,26 @@ Stored procedure with IN parameters	Use a PreparedStatement object
 Stored procedure with IN and OUT parameters	Use a CallableStatement object
 
 Good link : https://developer.ibm.com/articles/dm-1209storedprocedures/
+
+
+Hibernate is a JPA implementation, while Spring Data JPA is a JPA data access abstraction.
+Spring Data JPA cannot work without a JPA provider.
+
+JDBC is a low level standard for interaction with databases.
+JPA is higher level standard for the same purpose.
+ JPA allows you to use an object model in your application which can make your life much easier.
+ JDBC allows you to do more things with the Database directly, but it requires more attention
+
+As an object-oriented query language, it uses Java Persistence Query Language (JPQL) to execute database operations.
+
+As an object-oriented query language, it uses Hibernate Query Language (HQL) to execute database operations.
+
+To interconnect with the entity manager factory for the persistence unit, it uses EntityManagerFactory interface. Thus, it gives an entity manager.
+
+To create Session instances, it uses SessionFactory interface.
+To make, read, and remove actions for instances of mapped entity classes, it uses EntityManager interface. This interface interconnects with the persistence condition.
+
+To make, read, and remove actions for instances of mapped entity classes, it uses Session interface. It acts as a runtime interface between a Java application and Hibernate.
 
 
 
