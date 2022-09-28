@@ -1,0 +1,47 @@
+🔹‘vmstat’ - reports information about processes, memory, paging,
+block IO, traps, and CPU activity.
+🔹‘iostat’ - reports CPU and input/output statistics of the system.
+🔹‘netstat’ - displays statistical data related to IP, TCP, UDP, and ICMP
+protocols.
+🔹‘lsof’ - lists open files of the current system.
+🔹‘pidstat’ - monitors the utilization of system resources by all or
+specified processes, including CPU, memory, device IO, task
+switching, threads, etc.
+
+
+
+Bachelor’s degree or equivalent experience
+Advanced knowledge of application, data and infrastructure architecture disciplines
+8+ years of Experience in multi-tier architectures
+Understanding of performance tuning, message integrity and security related to real-time applications
+Ability to work in large, collaborative teams to achieve organizational goals, and passionate about building an innovative culture
+Experience of full software development lifecycle and agile methodologies
+A DevOps mind-set, with a strong focus on continuous improvement
+Extensive experience with enterprise Java, including the following technologies:
+Java 8+, Mutli-threaded programming
+Excellent knowledge of Spring, spring-boot and MVC frameworks
+Enterprise Messaging protocols and tools (JMS/Solace/AMPS)
+Experience in any cloud platform like AWS
+Strong experience in building distributed system and knowledge of Microservice Architecture
+FIX, XML, JSON, Protobuf
+Unix, Apache, Maven, Git
+Knowledge of financial products and Agile development will be beneficial
+
+
+
+Bachelor's degree or related technical field or equivalent practical experience
+7 or more years of software development experience using Java tech stack, including but not limited to: Core Java, Spring or Spring Boot, Junit, Mockito
+Experience in application architecture and design
+Experience with one or more database technologies, e.g. Oracle, MySQL and Cassandra
+Experience in building REST APIs
+Knowledge of test-driven development and testing frameworks
+Knowledge of one or more cloud technologies like Cloud foundry, AWS
+Knowledge of one or more messaging technologies, e.g. Kafka, IBM MQ
+Knowledge of one or more IMDG technologies, e.g. Gemfire, Hazelcast
+Knowledge of data formats like JSON, XML
+Experience in Agile development methodologies
+Working experience on devops methodology
+Strong technical leadership
+Ability to innovate, High level of motivation to get things delivered
+Strong interpersonal skills and team building attitude
+Experience in version control tools like SVN, GIT

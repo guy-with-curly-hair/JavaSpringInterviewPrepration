@@ -17,4 +17,17 @@ mutext lock unlock 100ns
 main memory refernce 100ns
 compress 1k byte 10 micro sec
 send 2kb byte ver 1 GBPS network 20 micro sec
-read 1 mb
+read 1 mb sequential from memory 250 micro sec
+roundtrip within same data centre   500microsec
+disk seek 10 ms
+read 1 mb sequenctal from network 10 ms
+read 1 mb from disk 30 ms
+send packet CA 150 ms
+
+
+Avaibility number
+
+
+Important point wrt to system design number of servers, etc
+     
+
