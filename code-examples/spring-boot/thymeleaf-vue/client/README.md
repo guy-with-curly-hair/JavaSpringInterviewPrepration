@@ -1,0 +1,1 @@
+This Gradle modules creates a JAR containing all the Vue resources created by the NPM build.

@@ -1,0 +1,17 @@
+{
+  "name": "pact-node-messages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:pact:consumer": "mocha src/consumer/*.spec.js --exit",
+    "test:pact:provider": "mocha src/provider/*.spec.js --exit",
+    "publish:pact": "node pact/publish.js"
+  },
+  "author": "Tom Hombergs",
+  "license": "MIT",
+  "devDependencies": {
+    "@pact-foundation/pact": "^7.0.3",
+    "mocha": "^5.2.0"
+  }
+}

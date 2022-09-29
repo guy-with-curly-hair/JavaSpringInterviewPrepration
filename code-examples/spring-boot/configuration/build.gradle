@@ -1,0 +1,32 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.0.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'io.reflectoring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '13'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation('org.junit.jupiter:junit-jupiter:5.4.0')
+	testImplementation('org.springframework.boot:spring-boot-starter-test'){
+		exclude group: 'junit', module: 'junit'
+		exclude group: 'org.junit.vintage'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}

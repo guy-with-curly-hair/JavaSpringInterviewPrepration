@@ -1,5 +1,15 @@
 Spring Interview Topics:
 
+Can we have multiple context in single spring jvm
+bydefault single context is preffered so better autowiring is possible sinle spring need to look into single context to bind the bean //
+
+but yes we can define the multiple context via new key keyword like new ClassPathXMLApplication context & give name to context
+and while taking out bean we specifically need to get bean fromr respective context
+
+
+
+
+
 http headers https://www.geeksforgeeks.org/http-headers/
 General Header: This type of headers applied on Request and Response headers both but with out affecting the database body.
 Request Header: This type of headers contains information about the fetched request by the client.
