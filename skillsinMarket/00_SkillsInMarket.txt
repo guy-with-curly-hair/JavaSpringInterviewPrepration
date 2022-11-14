@@ -1,5 +1,8 @@
 Skills to Acquire
 
+Java8 · GraphQL · Spring Framework · Spring Cloud · Spring · RabbitMQ · Pivotal Cloud Foundry (PCF) · Redis · Git ·
+RESTful WebServices · REST APIs · PostgreSQL · MongoDB · Java · Spring MVC · Spring Boot
+
 1) Database performance, such as SQL tuning and optimization and administration (e.g. Oracle).
 2) Mid tier performance (e.g. Java profiling) and related tools.
 3) Load generation / measurement software and concepts (e.g. JMeter, or other custom load generation software) for HTTP, REST, RPC and similar cloud systems.

@@ -1,4 +1,24 @@
 Spring Interview Topics:
+Sprig questions : https://www.javapedia.net/Spring-Boot/3088ring
+https://www.baeldung.com/jpa-hibernate-batch-insert-update
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+After removing the tomcat dependency, the next step is to specify the dependency for jetty.
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jetty</artifactId>
+</dependency>
+
 
 Can we have multiple context in single spring jvm
 bydefault single context is preffered so better autowiring is possible sinle spring need to look into single context to bind the bean //

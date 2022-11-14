@@ -45,3 +45,40 @@ Strong technical leadership
 Ability to innovate, High level of motivation to get things delivered
 Strong interpersonal skills and team building attitude
 Experience in version control tools like SVN, GIT
+
+systems and environments
+Ability and willingness to lead global team of developers, perform code reviews and mentor junior team members as needed.
+Extensive core Java (version 11 or higher) development experience with Spring-boot or similar frameworks
+Experience in developing cloud-native applications (12-factor app) with demonstrated implementation of Restful microservices, containers , resilient and scalable platforms
+Hands-on experience with Docker, Kubernetes or related container platform
+Strong understanding and experience of release engineering and continuous delivery process
+Experience with two or more database technologies like Oracle , Cassandra or Mongo DB
+Experience in building high throughput platforms using Kafka technology
+Prior experience with distributed cache such as Gemfire, REDIS , gridgain or ignite.
+Prior experience with java code instrumentation , implementing monitoring & capturing application metrics
+Test Driven Development using JUnit , Mockito or similar
+Expertise in application, data, and infrastructure architecture disciplines
+Good understanding of data structures, algorithms & multi-threaded programming
+Experience in building reusable services frameworks and/or opinionated libraries consumed by other development teams
+
+
+𝟭) 𝗘𝘃𝗲𝗿𝘆𝘁𝗵𝗶𝗻𝗴 𝗔𝗯𝗼𝘂𝘁 𝗗𝘆𝗻𝗮𝗺𝗶𝗰 𝗣𝗿𝗼𝗴𝗿𝗮𝗺𝗺𝗶𝗻𝗴
+Link: https://lnkd.in/dQDBVqQs
+
+𝟮)𝗦𝗢𝗦 𝗗𝘆𝗻𝗮𝗺𝗶𝗰 𝗣𝗿𝗼𝗴𝗿𝗮𝗺𝗺𝗶𝗻𝗴 [𝗧𝘂𝘁𝗼𝗿𝗶𝗮𝗹]
+Link: https://lnkd.in/dycfq2GM
+
+𝟯)𝗗𝘆𝗻𝗮𝗺𝗶𝗰 𝗣𝗿𝗼𝗴𝗿𝗮𝗺𝗺𝗶𝗻𝗴 𝗼𝗻 𝗧𝗿𝗲𝗲𝘀
+Link: https://lnkd.in/dAJJkekT
+
+𝟰)[𝗧𝘂𝘁𝗼𝗿𝗶𝗮𝗹] 𝗢𝗽𝘁𝗶𝗺𝗶𝘇𝗲𝗱 𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻 𝗳𝗼𝗿 𝗞𝗻𝗮𝗽𝘀𝗮𝗰𝗸 𝗽𝗿𝗼𝗯𝗹𝗲𝗺
+Link: https://lnkd.in/dHFXv4va
+
+𝟱)𝗜𝗻𝘁𝗿𝗼𝗱𝘂𝗰𝘁𝗶𝗼𝗻 𝘁𝗼 𝗗𝗣 𝘄𝗶𝘁𝗵 𝗕𝗶𝘁𝗺𝗮𝘀𝗸𝗶𝗻𝗴
+Link: https://lnkd.in/d6ykBjt4
+
+𝟲)𝗗𝘆𝗻𝗮𝗺𝗶𝗰 𝗣𝗿𝗼𝗴𝗿𝗮𝗺𝗺𝗶𝗻𝗴 𝗢𝗽𝘁𝗶𝗺𝗶𝘇𝗮𝘁𝗶𝗼𝗻𝘀
+Link: https://lnkd.in/dDGFySfk
+
+𝟳)[𝗧𝘂𝘁𝗼𝗿𝗶𝗮𝗹]𝗔 𝗖𝗼𝗺𝗽𝗹𝗲𝘁𝗲 𝗚𝘂𝗶𝗱𝗲 𝗼𝗻 𝗠𝗮𝘁𝗿𝗶𝘅 𝗘𝘅𝗽𝗼𝗻𝗲𝗻𝘁𝗶𝗮𝘁𝗶𝗼𝗻
+Link: https://lnkd.in/dfQ7eBpH
